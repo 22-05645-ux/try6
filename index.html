@@ -3,24 +3,171 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CISC Fleet Dashboard</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>CISC Fleet Department</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0d703f;
+      margin: 0;
+      padding: 0;
+      color: #000;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #146c43;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    header .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: bold;
+    }
+
+    header img {
+      height: 35px;
+    }
+
+    .clock {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .container {
+      background-color: #f5fef8;
+      border-radius: 10px;
+      margin: 20px auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 900px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.15);
+    }
+
+    .back-btn {
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      padding: 6px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .vehicle-card {
+      background-color: #c6f6d5;
+      border: 1px solid #8fd19e;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+    }
+
+    .vehicle-card img {
+      max-width: 300px;
+      margin-top: 10px;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: flex-start;
+      gap: 8px;
+      margin-top: 15px;
+    }
+
+    .tabs button {
+      border: none;
+      padding: 8px 12px;
+      border-radius: 4px;
+      background-color: #e9ecef;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .tabs button.active {
+      background-color: #1a7431;
+      color: white;
+    }
+
+    form {
+      margin-top: 15px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    form input, form select {
+      padding: 8px;
+      border: 1px solid #8fd19e;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    form button {
+      background-color: #1a7431;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 120px;
+      align-self: center;
+    }
+
+    form button:hover {
+      background-color: #145c2b;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <div class="logo-container">
-      <img src="https://media.licdn.com/dms/image/v2/D560BAQGwtTvFVA5e_Q/company-logo_200_200/company-logo_200_200/0/1697595933193?e=2147483647&v=beta&t=W1ns6ZfPGwe6RzATto9wQZQs9cTA_F3J9Ddi5NUPNak" class="logo" alt="Company Logo" />
-      <h1>CISC Fleet Dashboard</h1>
+  <header>
+    <div class="logo">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/LG_logo.svg" alt="CIFRA Logo">
+      <span>CISC Fleet Department</span>
     </div>
-    <div id="clock" class="clock"></div>
+    <div class="clock" id="clock">9:17:38 AM</div>
   </header>
 
-  <main id="app" class="container"></main>
+  <div class="container">
+    <button class="back-btn">Back</button>
 
-  <footer class="footer">
-    <p>© 2025 CISC Fleet Department</p>
-  </footer>
+    <div class="vehicle-card">
+      <b>NGX 4853 - Batangas City</b>
+      <div>
+        <img src="https://alpinemotors.com.ph/wp-content/uploads/2021/05/L300.png" alt="Vehicle">
+      </div>
+    </div>
 
-  <script src="app.js"></script>
+    <div class="tabs">
+      <button>Details</button>
+      <button class="active">Maintenance</button>
+      <button>Vehicle Request Form</button>
+      <button>Whereabouts</button>
+      <button>Fuel</button>
+      <button>Reports</button>
+      <button>History</button>
+    </div>
+
+    <form>
+      <input type="text" placeholder="dd/mm/yyyy">
+      <input type="text" placeholder="CV Number">
+      <input type="text" placeholder="Reason / Description">
+      <input type="text" placeholder="Cost / Amount">
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <script>
+    // Clock update
+    function updateClock() {
+      document.getElementById('clock').textContent = new Date().toLocaleTimeString();
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
 </body>
 </html>
