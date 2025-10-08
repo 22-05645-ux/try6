@@ -221,8 +221,8 @@ body {
   background: #145e26;
 }
 
-/* EDIT / DELETE BUTTONS */
-.edit-btn, .del-btn {
+/* DELETE BUTTON */
+.del-btn {
   border: none;
   cursor: pointer;
   font-size: 16px;
@@ -232,8 +232,10 @@ body {
   border-radius: 4px;
 }
 
-.edit-btn:hover { background:#eef7ef; color: #0b6623; }
-.del-btn:hover { background:#fff5f5; color: #a11; }
+.del-btn:hover {
+  background: #fff5f5;
+  color: #a11;
+}
 
 @media (max-width: 700px) {
   .history-group-table th, .history-group-table td { font-size: 13px; padding: 6px; }
