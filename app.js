@@ -62,31 +62,23 @@ function saveData() {
 
 // ------------------- RENDER VEHICLE LIST -------------------
 function renderList() {
-  app.innerHTML = `
-    <div class="vehicle-header">
-      <h2>Fleet Overview</h2>
-      <p>Click on a vehicle card to view details and records.</p>
-    </div>
-    <div class="grid"></div>
-  `;
-
+  app.innerHTML = `<div class="grid"></div>`;
   const grid = app.querySelector(".grid");
+
   vehicles.forEach(v => {
-    const d = details[v.plate];
     const imgUrl = vehicleImages[v.plate];
     const card = document.createElement("div");
     card.className = "card";
     card.innerHTML = `
       <img src="${imgUrl}" alt="${v.plate}" />
       <h2>${v.plate}</h2>
-      <p><b>${d.model}</b></p>
-      <p>Status: <span class="${d.status === "Active" ? "status-active" : "status-inactive"}">${d.status}</span></p>
       <p>Whereabouts: ${v.whereabouts}</p>
     `;
     card.onclick = () => { selectedVehicle = v.plate; activeTab = "Details"; renderDetails(); };
     grid.appendChild(card);
   });
 }
+
 
 // ------------------- VEHICLE DETAILS -------------------
 function renderDetails() {
@@ -324,3 +316,4 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
