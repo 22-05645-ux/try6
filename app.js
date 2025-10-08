@@ -15,7 +15,7 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
 ];
 
 const details = {
-  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2022", status: "Active" },
+  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", status: "Active" },
   "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021", status: "Active" },
   "NFZ 2848": { model: "Isuzu Traviz", yearBought: "2023", status: "Under Maintenance" },
   "CBP 5511": { model: "Isuzu Elf Truck", yearBought: "2021", status: "Active" },
@@ -285,3 +285,4 @@ function submitReport(e) {
 
 // ------------------- INIT -------------------
 renderList();
+
