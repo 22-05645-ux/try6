@@ -1,142 +1,188 @@
-/* ---------------- GLOBAL ---------------- */
 body {
-  font-family: "Segoe UI", Arial, sans-serif;
+  font-family: Arial, sans-serif;
+  background-color: #166116;
   margin: 0;
-  background: #e9f5ec;
-  color: #333;
+  padding: 0;
 }
 
-header.header {
-  background: #1a7431;
+/* HEADER */
+.header {
+  background-color: #0b6623;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 12px 24px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  padding: 15px 30px;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .logo {
   width: 50px;
-  height: 50px;
-  border-radius: 8px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 6px;
 }
 
 .clock {
-  font-size: 40px; /* ✅ Bigger clock */
-  font-weight: bold;
-  color: #fff;
-  text-align: right;
+  font-size: 30px;        /* ← Make the clock text larger */
+  font-weight: bold;      /* ← Bold for better visibility */
+  color: #FFFFFF;         /* ← Dark green color (change as you like) */
+  text-align: right;      /* ← Align to right if in a header */
+  margin: 10px 20px;      /* ← Add spacing */
+  font-family: "Segoe UI", Arial, sans-serif; /* ← Clean modern font */
 }
 
-/* ---------------- GRID VIEW ---------------- */
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 15px;
+  background-color: #0b6623;
+  color: white;
+   margin: 0;
+}
+
+/* VEHICLE GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 25px;
   padding: 30px;
 }
 
 .card {
-  background: white;
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  background-color: white;
+  border-radius: 12px;
+  padding: 20px 20px;
   text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+  transform: scale(1.04);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
 .card img {
-  width: 100%;
-  height: 150px;
-  object-fit: contain;
-  border-radius: 8px;
+  width: 90%;
+  height: auto;
+  max-width: 220px;
+  margin: 10px auto 20px;
+  display: block;
 }
 
-.status {
-  display: inline-block;
-  margin: 8px 0;
-  padding: 5px 10px;
-  border-radius: 12px;
-  font-size: 13px;
+.card h2 {
+  margin: 5px 0;
+  font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: #000;
 }
 
-.status-active {
-  background-color: #2e8b57;
-}
-.status-maintenance {
-  background-color: #f0ad4e;
-}
-.status-inactive {
-  background-color: #d9534f;
+.card p {
+  font-size: 14px;
+  color: #222;
+  margin: 0;
 }
 
-/* ---------------- DETAILS VIEW ---------------- */
+/* BACK BUTTON */
+.back-btn {
+  background: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 6px 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.back-btn:hover {
+  background: #e2e8f0;
+}
+
+/* DETAILS PAGE */
 .details-container {
   background: #f5fef8;
-  padding: 35px;
-  border-radius: 14px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  max-width: 1100px; /* ✅ wider container */
-  margin: 50px auto;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  max-width: 850px;
+  margin: 40px auto;
   text-align: center;
 }
 
 .details-image {
   width: 100%;
-  max-width: 400px;
-  margin: 20px auto;
+  max-width: 300px;
+  margin: 10px auto 20px;
+  border-radius: 8px;
   display: block;
-  border-radius: 10px;
 }
 
-.back-btn {
-  background: #1a7431;
-  color: white;
+.tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.tab-buttons button {
+  background: #e9ecef;
   border: none;
   padding: 10px 16px;
   border-radius: 6px;
   cursor: pointer;
-  margin-bottom: 20px;
-}
-.back-btn:hover {
-  background: #145e26;
+  font-weight: bold;
+  transition: all 0.2s;
 }
 
-.tab-buttons {
-  margin: 25px 0;
-}
-.tab-buttons button {
-  background: #e2f0e9;
-  border: none;
-  padding: 10px 18px;
-  margin: 5px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: 0.2s;
-}
-.tab-buttons button.active,
-.tab-buttons button:hover {
+.tab-buttons button.active {
   background: #1a7431;
   color: white;
 }
 
-/* ---------------- HISTORY TABLE ---------------- */
+.tab-buttons button:hover {
+  background: #228b22;
+  color: white;
+}
+
+#tabContent form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+#tabContent input,
+#tabContent select {
+  padding: 8px 10px;
+  border: 1px solid #8fd19e;
+  border-radius: 5px;
+}
+
+#tabContent button {
+  background: #1a7431;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 140px;
+  margin: 10px auto 0;
+}
+
+#tabContent button:hover {
+  background: #145c2b;
+}
+
+/* HISTORY TABLE SECTIONS */
 .history-section {
   margin-top: 15px;
   border: 1px solid #ccc;
@@ -153,6 +199,7 @@ header.header {
   user-select: none;
   transition: background 0.2s ease;
 }
+
 .history-header:hover {
   background-color: #145e26;
 }
@@ -160,22 +207,20 @@ header.header {
 .history-body {
   display: block;
   background-color: #f8fff8;
-  padding: 15px;
 }
 
-/* ✅ Table spacing improved */
 .history-group-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .history-group-table th,
 .history-group-table td {
   border: 1px solid #c8e6c9;
-  padding: 10px 14px;
+  padding: 6px 10px;
   text-align: left;
-  vertical-align: middle;
+  vertical-align: top;
 }
 
 .history-group-table th {
@@ -184,66 +229,66 @@ header.header {
   font-weight: 600;
 }
 
-/* ✅ Compact red delete button */
-.del-btn {
-  border: none;
-  background: #ff4d4d;
-  color: white;
-  cursor: pointer;
-  font-size: 14px;
-  width: 32px;
-  height: 32px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto;
-  transition: 0.2s ease;
-}
-.del-btn:hover {
-  background: #e60000;
-  transform: scale(1.05);
-}
-
-/* Export Button */
+/* EXPORT BUTTON */
 .export-btn {
   background: #1a7431;
   color: white;
   border: none;
-  padding: 10px 18px;
-  border-radius: 6px;
+  padding: 8px 14px;
+  border-radius: 5px;
   cursor: pointer;
-  margin: 10px 0;
-  font-weight: bold;
+  margin-bottom: 8px;
 }
+
 .export-btn:hover {
   background: #145e26;
 }
 
-/* ---------------- FOOTER ---------------- */
-footer.footer {
-  background: #1a7431;
-  color: white;
-  text-align: center;
-  padding: 12px;
-  font-size: 14px;
-  margin-top: 50px;
+/* DELETE BUTTON */
+.del-btn {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background: transparent;
+  margin: 0 4px;
+  padding: 4px 6px;
+  border-radius: 4px;
 }
 
-/* ---------------- RESPONSIVE ---------------- */
-@media (max-width: 900px) {
-  .details-container {
-    max-width: 95%;
-    padding: 20px;
-  }
+.del-btn:hover {
+  background: #fff5f5;
+  color: #a11;
+}
 
-  .history-group-table th,
-  .history-group-table td {
+@media (max-width: 700px) {
+  .grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 15px;
+  }
+  .card img {
+    max-width: 150px;
+  }
+  .card h2 {
+    font-size: 15px;
+  }
+  .card p {
     font-size: 13px;
-    padding: 8px;
-  }
-
-  .clock {
-    font-size: 28px;
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
