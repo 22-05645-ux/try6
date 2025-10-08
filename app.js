@@ -184,18 +184,54 @@ function renderTab(v, d) {
   }
 
   else if (activeTab === "History") {
-    tabContent.innerHTML = v.history.length
-      ? v.history.map(h => `
-          <p><b>${h.type}</b> — ${Object.entries(h)
-            .filter(([k]) => k !== "type")
-            .map(([k,v]) => `${k}: ${v}`).join(", ")}</p>`).join("")
-      : `<p>No history yet.</p>`;
+    tabContent.innerHTML = `
+      <button onclick="exportCSV('${v.plate}')" style="margin-bottom:10px;background:#1a7431;color:white;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;">
+        📥 Export CSV
+      </button>
+      ${
+        v.history.length
+          ? v.history.map(h => `
+            <p><b>${h.type}</b> — ${Object.entries(h)
+              .filter(([k]) => k !== "type")
+              .map(([k,v]) => `${k}: ${v}`).join(", ")}</p>`).join("")
+          : `<p>No history yet.</p>`
+      }
+    `;
   }
 }
 
 // ------------------- HELPERS -------------------
 function backToList(){ selectedVehicle=null; renderList(); }
 function setTab(tab){ activeTab=tab; renderDetails(); }
+function saveAndRefresh(tab){ saveData(); setTab(tab); }
+
+// ------------------- CSV EXPORT -------------------
+function exportCSV(plate) {
+  const v = vehicles.find(x => x.plate === plate);
+  if (!v || !v.history.length) {
+    alert("No history to export for this vehicle.");
+    return;
+  }
+
+  // Prepare headers
+  const keys = Array.from(new Set(v.history.flatMap(Object.keys)));
+  const rows = [keys.join(",")];
+
+  // Rows
+  v.history.forEach(entry => {
+    const row = keys.map(k => `"${(entry[k] ?? "").toString().replace(/"/g, '""')}"`);
+    rows.push(row.join(","));
+  });
+
+  const csvContent = rows.join("\n");
+  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${plate}_history.csv`;
+  link.click();
+  URL.revokeObjectURL(url);
+}
 
 // ------------------- FORMS -------------------
 function submitMaintenance(e) {
@@ -203,9 +239,8 @@ function submitMaintenance(e) {
   const data = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Maintenance", ...data });
-  saveData();
+  saveAndRefresh("History");
   alert("Maintenance record saved!");
-  setTab("History");
 }
 
 function submitVehicleRequest(e) {
@@ -213,9 +248,8 @@ function submitVehicleRequest(e) {
   const data = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Vehicle Request", ...data });
-  saveData();
+  saveAndRefresh("History");
   alert("Vehicle request saved!");
-  setTab("History");
 }
 
 function submitWhereabouts(e) {
@@ -227,9 +261,8 @@ function submitWhereabouts(e) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.whereabouts = place;
   v.history.push({ type: "Whereabouts", date: new Date().toISOString().split("T")[0], place });
-  saveData();
+  saveAndRefresh("Details");
   alert("Whereabouts updated!");
-  setTab("Details");
 }
 
 function submitFuel(e) {
@@ -237,9 +270,8 @@ function submitFuel(e) {
   const data = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Fuel", ...data });
-  saveData();
+  saveAndRefresh("History");
   alert("Fuel record saved!");
-  setTab("History");
 }
 
 function submitReport(e) {
@@ -247,9 +279,8 @@ function submitReport(e) {
   const file = e.target.report.value.split("\\").pop();
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Report", date: new Date().toISOString().split("T")[0], file });
-  saveData();
+  saveAndRefresh("History");
   alert("Report uploaded!");
-  setTab("History");
 }
 
 // ------------------- INIT -------------------
