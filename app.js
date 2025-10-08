@@ -114,6 +114,7 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Maintenance") {
     tab.innerHTML = `
+      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Maintenance')">📥 Export CSV</button>
       <form onsubmit="submitMaintenance(event)">
         <input type="date" name="date" required />
         <input type="text" name="cv" placeholder="CV Number" required />
@@ -125,6 +126,7 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Vehicle Request") {
     tab.innerHTML = `
+      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Vehicle Request')">📥 Export CSV</button>
       <form onsubmit="submitVehicleRequest(event)">
         <input type="date" name="date" required />
         <input type="text" name="project" placeholder="Project" required />
@@ -139,6 +141,7 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Whereabouts") {
     tab.innerHTML = `
+      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Whereabouts')">📥 Export CSV</button>
       <form onsubmit="submitWhereabouts(event)">
         <select name="place" required>
           <option value="">Select Location</option>
@@ -154,6 +157,7 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Fuel") {
     tab.innerHTML = `
+      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Fuel')">📥 Export CSV</button>
       <form onsubmit="submitFuel(event)">
         <input type="date" name="date" required />
         <input type="text" name="bearer" placeholder="Bearer" required />
@@ -170,6 +174,7 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Reports") {
     tab.innerHTML = `
+      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Report')">📥 Export CSV</button>
       <form onsubmit="submitReport(event)">
         <input type="file" name="report" required />
         <button type="submit">Upload</button>
@@ -179,78 +184,6 @@ function renderTab(v, d) {
   else if (activeTab === "History") {
     renderHistory(v, tab);
   }
-}
-
-// ------------------- HISTORY -------------------
-function renderHistory(v, tab) {
-  if (!v.history.length) {
-    tab.innerHTML = `<p>No history yet.</p>`;
-    return;
-  }
-
-  const grouped = {};
-  v.history.forEach((item, i) => {
-    if (!grouped[item.type]) grouped[item.type] = [];
-    grouped[item.type].push({ ...item, index: i });
-  });
-
-  let html = `<button onclick="exportCSV('${v.plate}')" class="export-btn">📥 Export CSV</button>`;
-
-  for (const [type, records] of Object.entries(grouped)) {
-    html += `
-      <div class="history-section">
-        <div class="history-header" onclick="toggleHistory('${type}')">▼ ${type}</div>
-        <div class="history-body" id="history-${type}">
-          <table class="history-group-table">
-            <thead><tr>${generateHeaders(type)}<th>Actions</th></tr></thead>
-            <tbody>${records.map(r => generateRow(type, r)).join("")}</tbody>
-          </table>
-        </div>
-      </div>
-    `;
-  }
-  tab.innerHTML = html;
-}
-
-function generateHeaders(type) {
-  switch (type) {
-    case "Maintenance": return "<th>Date</th><th>CV No.</th><th>Reason / Description</th><th>Cost / Amount</th>";
-    case "Fuel": return "<th>Date</th><th>Bearer</th><th>PO #</th><th>Fuel Type</th><th>Amount</th>";
-    case "Vehicle Request": return "<th>Date</th><th>Project</th><th>Job Order #</th><th>Location</th><th>Driver</th><th>Purpose</th><th>Requested By</th>";
-    case "Whereabouts": return "<th>Date</th><th>Place</th>";
-    case "Report": return "<th>Date</th><th>File</th>";
-    default: return "<th>Date</th><th>Details</th>";
-  }
-}
-
-function generateRow(type, r) {
-  let cells = "";
-  switch (type) {
-    case "Maintenance": cells = `<td>${r.date}</td><td>${r.cv}</td><td>${r.reason}</td><td>₱${r.cost}</td>`; break;
-    case "Fuel": cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td>`; break;
-    case "Vehicle Request": cells = `<td>${r.date}</td><td>${r.project}</td><td>${r.from}</td><td>${r.to}</td><td>${r.driver}</td><td>${r.purpose}</td><td>${r.request}</td>`; break;
-    case "Whereabouts": cells = `<td>${r.date}</td><td>${r.place}</td>`; break;
-    case "Report": cells = `<td>${r.date}</td><td>${r.file}</td>`; break;
-    default: cells = `<td>${r.date}</td><td>${JSON.stringify(r)}</td>`;
-  }
-  return `<tr>${cells}<td><button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button></td></tr>`;
-}
-
-// ------------------- DELETE / COLLAPSE -------------------
-function deleteRecord(index) {
-  const v = vehicles.find(x => x.plate === selectedVehicle);
-  if (confirm("Are you sure you want to delete this record?")) {
-    v.history.splice(index, 1);
-    saveAndRefresh("History");
-  }
-}
-
-function toggleHistory(type) {
-  const section = document.getElementById(`history-${type}`);
-  if (!section) return;
-  const isVisible = section.style.display !== "none";
-  section.style.display = isVisible ? "none" : "block";
-  section.previousElementSibling.textContent = (isVisible ? "▶" : "▼") + " " + type;
 }
 
 // ------------------- EXPORT CSV -------------------
@@ -325,5 +258,6 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
