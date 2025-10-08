@@ -122,7 +122,6 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Maintenance") {
     tab.innerHTML = `
-      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Maintenance')">📥 Export CSV</button>
       <form onsubmit="submitMaintenance(event)">
         <input type="date" name="date" required />
         <input type="text" name="cv" placeholder="CV Number" required />
@@ -134,7 +133,6 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Vehicle Request") {
     tab.innerHTML = `
-      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Vehicle Request')">📥 Export CSV</button>
       <form onsubmit="submitVehicleRequest(event)">
         <input type="date" name="date" required />
         <input type="text" name="project" placeholder="Project" required />
@@ -149,7 +147,6 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Whereabouts") {
     tab.innerHTML = `
-      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Whereabouts')">📥 Export CSV</button>
       <form onsubmit="submitWhereabouts(event)">
         <select name="place" required>
           <option value="">Select Location</option>
@@ -165,7 +162,6 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Fuel") {
     tab.innerHTML = `
-      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Fuel')">📥 Export CSV</button>
       <form onsubmit="submitFuel(event)">
         <input type="date" name="date" required />
         <input type="text" name="bearer" placeholder="Bearer" required />
@@ -182,7 +178,6 @@ function renderTab(v, d) {
   } 
   else if (activeTab === "Reports") {
     tab.innerHTML = `
-      <button class="export-btn" onclick="exportCSV('${v.plate}', 'Report')">📥 Export CSV</button>
       <form onsubmit="submitReport(event)">
         <input type="file" name="report" required />
         <button type="submit">Upload</button>
@@ -194,7 +189,7 @@ function renderTab(v, d) {
   }
 }
 
-// ------------------- HISTORY (with per-table CSV) -------------------
+// ------------------- HISTORY -------------------
 function renderHistory(v, tab) {
   if (!v.history.length) {
     tab.innerHTML = `<p>No history yet.</p>`;
