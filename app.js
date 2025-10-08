@@ -60,27 +60,35 @@ function saveData() {
   localStorage.setItem("vehicles", JSON.stringify(vehicles));
 }
 
-// ------------------- RENDER -------------------
+// ------------------- RENDER VEHICLE LIST -------------------
 function renderList() {
-  app.innerHTML = "";
-  const grid = document.createElement("div");
-  grid.className = "grid";
+  app.innerHTML = `
+    <div class="vehicle-header">
+      <h2>Fleet Overview</h2>
+      <p>Click on a vehicle card to view details and records.</p>
+    </div>
+    <div class="grid"></div>
+  `;
 
+  const grid = app.querySelector(".grid");
   vehicles.forEach(v => {
+    const d = details[v.plate];
+    const imgUrl = vehicleImages[v.plate];
     const card = document.createElement("div");
     card.className = "card";
-    const imgUrl = vehicleImages[v.plate];
     card.innerHTML = `
       <img src="${imgUrl}" alt="${v.plate}" />
       <h2>${v.plate}</h2>
+      <p><b>${d.model}</b></p>
+      <p>Status: <span class="${d.status === "Active" ? "status-active" : "status-inactive"}">${d.status}</span></p>
       <p>Whereabouts: ${v.whereabouts}</p>
     `;
     card.onclick = () => { selectedVehicle = v.plate; activeTab = "Details"; renderDetails(); };
     grid.appendChild(card);
   });
-  app.appendChild(grid);
 }
 
+// ------------------- VEHICLE DETAILS -------------------
 function renderDetails() {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   const d = details[selectedVehicle];
@@ -100,9 +108,10 @@ function renderDetails() {
   renderTab(v, d);
 }
 
-// ------------------- TAB CONTENT -------------------
+// ------------------- TABS -------------------
 function renderTab(v, d) {
   const tab = document.getElementById("tabContent");
+
   if (activeTab === "Details") {
     tab.innerHTML = `
       <p><b>Model:</b> ${d.model}</p>
@@ -110,7 +119,8 @@ function renderTab(v, d) {
       <p><b>Status:</b> ${d.status}</p>
       <p><b>Whereabouts:</b> ${v.whereabouts}</p>
     `;
-  } else if (activeTab === "Maintenance") {
+  } 
+  else if (activeTab === "Maintenance") {
     tab.innerHTML = `
       <form onsubmit="submitMaintenance(event)">
         <input type="date" name="date" required />
@@ -120,7 +130,8 @@ function renderTab(v, d) {
         <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Vehicle Request") {
+  } 
+  else if (activeTab === "Vehicle Request") {
     tab.innerHTML = `
       <form onsubmit="submitVehicleRequest(event)">
         <input type="date" name="date" required />
@@ -133,7 +144,8 @@ function renderTab(v, d) {
         <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Whereabouts") {
+  } 
+  else if (activeTab === "Whereabouts") {
     tab.innerHTML = `
       <form onsubmit="submitWhereabouts(event)">
         <select name="place" required>
@@ -147,7 +159,8 @@ function renderTab(v, d) {
         <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Fuel") {
+  } 
+  else if (activeTab === "Fuel") {
     tab.innerHTML = `
       <form onsubmit="submitFuel(event)">
         <input type="date" name="date" required />
@@ -162,19 +175,21 @@ function renderTab(v, d) {
         <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Reports") {
+  } 
+  else if (activeTab === "Reports") {
     tab.innerHTML = `
       <form onsubmit="submitReport(event)">
         <input type="file" name="report" required />
         <button type="submit">Upload</button>
       </form>
     `;
-  } else if (activeTab === "History") {
+  } 
+  else if (activeTab === "History") {
     renderHistory(v, tab);
   }
 }
 
-// ------------------- HISTORY DISPLAY -------------------
+// ------------------- HISTORY -------------------
 function renderHistory(v, tab) {
   if (!v.history.length) {
     tab.innerHTML = `<p>No history yet.</p>`;
@@ -205,53 +220,31 @@ function renderHistory(v, tab) {
   tab.innerHTML = html;
 }
 
-// ------------------- TABLE -------------------
 function generateHeaders(type) {
   switch (type) {
-    case "Maintenance":
-      return "<th>Date</th><th>CV No.</th><th>Reason / Description</th><th>Cost / Amount</th>";
-    case "Fuel":
-      return "<th>Date</th><th>Bearer</th><th>PO #</th><th>Fuel Type</th><th>Amount</th>";
-    case "Vehicle Request":
-      return "<th>Date</th><th>Project</th><th>Job Order #</th><th>Location</th><th>Driver</th><th>Purpose</th><th>Requested By</th>";
-    case "Whereabouts":
-      return "<th>Date</th><th>Place</th>";
-    case "Report":
-      return "<th>Date</th><th>File</th>";
-    default:
-      return "<th>Date</th><th>Details</th>";
+    case "Maintenance": return "<th>Date</th><th>CV No.</th><th>Reason / Description</th><th>Cost / Amount</th>";
+    case "Fuel": return "<th>Date</th><th>Bearer</th><th>PO #</th><th>Fuel Type</th><th>Amount</th>";
+    case "Vehicle Request": return "<th>Date</th><th>Project</th><th>Job Order #</th><th>Location</th><th>Driver</th><th>Purpose</th><th>Requested By</th>";
+    case "Whereabouts": return "<th>Date</th><th>Place</th>";
+    case "Report": return "<th>Date</th><th>File</th>";
+    default: return "<th>Date</th><th>Details</th>";
   }
 }
 
 function generateRow(type, r) {
   let cells = "";
   switch (type) {
-    case "Maintenance":
-      cells = `<td>${r.date}</td><td>${r.cv}</td><td>${r.reason}</td><td>₱${r.cost}</td>`;
-      break;
-    case "Fuel":
-      cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td>`;
-      break;
-    case "Vehicle Request":
-      cells = `<td>${r.date}</td><td>${r.project}</td><td>${r.from}</td><td>${r.to}</td><td>${r.driver}</td><td>${r.purpose}</td><td>${r.request}</td>`;
-      break;
-    case "Whereabouts":
-      cells = `<td>${r.date}</td><td>${r.place}</td>`;
-      break;
-    case "Report":
-      cells = `<td>${r.date}</td><td>${r.file}</td>`;
-      break;
-    default:
-      cells = `<td>${r.date}</td><td>${JSON.stringify(r)}</td>`;
+    case "Maintenance": cells = `<td>${r.date}</td><td>${r.cv}</td><td>${r.reason}</td><td>₱${r.cost}</td>`; break;
+    case "Fuel": cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td>`; break;
+    case "Vehicle Request": cells = `<td>${r.date}</td><td>${r.project}</td><td>${r.from}</td><td>${r.to}</td><td>${r.driver}</td><td>${r.purpose}</td><td>${r.request}</td>`; break;
+    case "Whereabouts": cells = `<td>${r.date}</td><td>${r.place}</td>`; break;
+    case "Report": cells = `<td>${r.date}</td><td>${r.file}</td>`; break;
+    default: cells = `<td>${r.date}</td><td>${JSON.stringify(r)}</td>`;
   }
-  return `<tr>${cells}<td>
-  <button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button>
-</td>
-</tr>`;
+  return `<tr>${cells}<td><button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button></td></tr>`;
 }
 
-// ------------------- EDIT / DELETE -------------------
-
+// ------------------- DELETE / COLLAPSE -------------------
 function deleteRecord(index) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   if (confirm("Are you sure you want to delete this record?")) {
@@ -260,14 +253,12 @@ function deleteRecord(index) {
   }
 }
 
-// ------------------- COLLAPSIBLE -------------------
 function toggleHistory(type) {
   const section = document.getElementById(`history-${type}`);
   if (!section) return;
   const isVisible = section.style.display !== "none";
   section.style.display = isVisible ? "none" : "block";
-  const header = section.previousElementSibling;
-  header.textContent = (isVisible ? "▶" : "▼") + " " + type;
+  section.previousElementSibling.textContent = (isVisible ? "▶" : "▼") + " " + type;
 }
 
 // ------------------- EXPORT CSV -------------------
@@ -287,7 +278,7 @@ function exportCSV(plate) {
   link.click();
 }
 
-// ------------------- FORM SUBMISSIONS -------------------
+// ------------------- FORMS -------------------
 function submitMaintenance(e) {
   e.preventDefault();
   const d = Object.fromEntries(new FormData(e.target));
@@ -305,9 +296,7 @@ function submitVehicleRequest(e) {
 function submitWhereabouts(e) {
   e.preventDefault();
   const f = new FormData(e.target);
-  const place = f.get("place") === "Company Use"
-    ? `Company Use - ${f.get("company")}`
-    : f.get("place");
+  const place = f.get("place") === "Company Use" ? `Company Use - ${f.get("company")}` : f.get("place");
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.whereabouts = place;
   v.history.push({ type: "Whereabouts", date: new Date().toISOString().split("T")[0], place });
@@ -335,4 +324,3 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
-
