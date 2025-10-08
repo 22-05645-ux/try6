@@ -198,6 +198,50 @@ body {
   background: #e2e8f0;
 }
 
+.history-section {
+  margin-top: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.history-header {
+  background-color: #1a7431;
+  color: white;
+  font-weight: bold;
+  padding: 8px 12px;
+}
+
+.history-group-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+  background-color: #f8fff8;
+}
+
+.history-group-table th,
+.history-group-table td {
+  border: 1px solid #c8e6c9;
+  padding: 6px 10px;
+  text-align: left;
+}
+
+.history-group-table th {
+  background-color: #d1f0d1;
+  color: #000;
+  font-weight: 600;
+}
+
+.export-btn {
+  background: #1a7431;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
 /* ------------------- FOOTER ------------------- */
 .footer {
   background: #064e3b;
@@ -208,3 +252,4 @@ body {
   position: fixed;
   bottom: 0; left: 0; right: 0;
 }
+
