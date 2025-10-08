@@ -30,7 +30,7 @@ body {
 .clock {
   font-size: 40px;        /* ← Make the clock text larger */
   font-weight: bold;      /* ← Bold for better visibility */
-  color: #1a5d2c;         /* ← Dark green color (change as you like) */
+  color: #FFFFFF;         /* ← Dark green color (change as you like) */
   text-align: right;      /* ← Align to right if in a header */
   margin: 10px 20px;      /* ← Add spacing */
   font-family: "Segoe UI", Arial, sans-serif; /* ← Clean modern font */
@@ -274,6 +274,7 @@ body {
     font-size: 13px;
   }
 }
+
 
 
 
