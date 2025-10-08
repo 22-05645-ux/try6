@@ -80,16 +80,21 @@ function renderList() {
 function renderDetails() {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   const d = details[selectedVehicle] || {};
+  const imgUrl = vehicleImages[v.plate] || "https://via.placeholder.com/300x180?text=No+Image";
+
   app.innerHTML = `
-    <button onclick="backToList()">← Back</button>
-    <h1>${v.plate}</h1>
-    <div class="tab-buttons">
-      ${["Details","Maintenance","Vehicle Request","Whereabouts","Fuel","Reports","History"]
-        .map(tab => `<button onclick="setTab('${tab}')" class="${activeTab===tab?'active':''}">${tab}</button>`).join("")}
+    <div class="details-container">
+      <button class="back-btn" onclick="backToList()">← Back</button>
+      <h1>${v.plate}</h1>
+      <img src="${imgUrl}" class="details-image" alt="${v.plate}" />
+      <div class="tab-buttons">
+        ${["Details","Maintenance","Vehicle Request","Whereabouts","Fuel","Reports","History"]
+          .map(tab => `<button onclick="setTab('${tab}')" class="${activeTab===tab?'active':''}">${tab}</button>`).join("")}
+      </div>
+      <div id="tabContent"></div>
     </div>
-    <div id="tabContent"></div>
   `;
-  renderTab(v,d);
+  renderTab(v, d);
 }
 
 function renderTab(v,d) {
@@ -100,8 +105,6 @@ function renderTab(v,d) {
       <p><b>Model:</b> ${d.model||"N/A"}</p>
       <p><b>Year Bought:</b> ${d.yearBought||"N/A"}</p>
       <p><b>Status:</b> ${d.status||"N/A"}</p>
-      <p><b>Last Trip:</b> ${d.lastTrip||"N/A"}</p>
-      <p><b>Last Maintenance:</b> ${d.lastMaintenance||"N/A"}</p>
       <p><b>Whereabouts:</b> ${v.whereabouts}</p>
     `;
   } else if (activeTab === "Maintenance") {
@@ -164,121 +167,18 @@ function renderTab(v,d) {
       </form>
     `;
   } else if (activeTab === "History") {
-    renderHistory(v, tabContent);
-  }
-}
-
-// ------------------- HISTORY (Expandable + Sortable + CSV) -------------------
-function renderHistory(v, tabContent) {
-  if (!v.history.length) {
     tabContent.innerHTML = `<p>No history yet.</p>`;
-    return;
   }
-
-  if (!window.expanded) window.expanded = { Maintenance:true, Vehicle:true, Fuel:true, Whereabouts:true, Report:true };
-  if (!window.sortState) window.sortState = {};
-
-  const grouped = v.history.reduce((acc,h)=>{ acc[h.type]=acc[h.type]||[]; acc[h.type].push(h); return acc; },{});
-  let html="";
-
-  function makeTable(headers, rows, type) {
-    return `
-      <table>
-        <thead style="background:#f3f4f6">
-          <tr>
-            ${headers.map((h,i)=>
-              `<th onclick="sortHistory('${type}',${i})" style="cursor:pointer;">
-                ${h} ${window.sortState[type]?.col===i?(window.sortState[type].asc?"▲":"▼"):""}
-              </th>`).join("")}
-          </tr>
-        </thead>
-        <tbody>${rows.join("")}</tbody>
-      </table>
-    `;
-  }
-
-  function makeToggle(title,key,tableHtml,color) {
-    const isOpen=window.expanded[key];
-    return `
-      <div style="margin-bottom:12px;">
-        <div style="display:flex;justify-content:space-between;align-items:center;">
-          <button onclick="toggleHistory('${key}')" 
-            style="flex:1;text-align:left;font-weight:bold;background:${color};color:white;padding:6px;border:none;border-radius:4px;">
-            ${isOpen?"▼":"▶"} ${title}
-          </button>
-          <button onclick="exportHistory('${key}')" 
-            style="margin-left:8px;background:#10b981;color:white;border:none;padding:6px 10px;border-radius:4px;cursor:pointer;">
-            ⬇ CSV
-          </button>
-        </div>
-        ${isOpen?tableHtml:""}
-      </div>
-    `;
-  }
-
-  // Sections
-  if (grouped["Maintenance"]) {
-    let rows=grouped["Maintenance"].map(h=>`<tr><td>${h.date}</td><td>${h.cv}</td><td>${h.reason}</td><td>₱${h.cost}</td></tr>`);
-    html+=makeToggle("Maintenance","Maintenance",makeTable(["Date","CV No.","Reason","Cost"],rows,"Maintenance"),"#065f46");
-  }
-  if (grouped["Vehicle"]) {
-    let rows=grouped["Vehicle"].map(h=>`<tr><td>${h.date}</td><td>${h.project}</td><td>${h.from}</td><td>${h.to}</td><td>${h.driver}</td><td>${h.purpose}</td><td>${h.request}</td></tr>`);
-    html+=makeToggle("Vehicle Request","Vehicle",makeTable(["Date","Project","Job Order #","Location","Driver","Purpose","Requested By"],rows,"Vehicle"),"#1e40af");
-  }
-  if (grouped["Fuel"]) {
-    let rows=grouped["Fuel"].map(h=>`<tr><td>${h.date}</td><td>${h.bearer}</td><td>${h.order}</td><td>${h.gas}</td><td>₱${h.amount}</td></tr>`);
-    html+=makeToggle("Fuel","Fuel",makeTable(["Date","Bearer","PO #","Type","Amount"],rows,"Fuel"),"#c2410c");
-  }
-  if (grouped["Whereabouts"]) {
-    let rows=grouped["Whereabouts"].map(h=>`<tr><td>${h.date}</td><td>${h.place}</td></tr>`);
-    html+=makeToggle("Whereabouts","Whereabouts",makeTable(["Date","Location"],rows,"Whereabouts"),"#6d28d9");
-  }
-  if (grouped["Report"]) {
-    let rows=grouped["Report"].map(h=>`<tr><td>${h.date}</td><td>${h.file}</td></tr>`);
-    html+=makeToggle("Reports","Report",makeTable(["Date","File"],rows,"Report"),"#b91c1c");
-  }
-
-  tabContent.innerHTML=html;
 }
 
 // ------------------- HELPERS -------------------
 function backToList(){selectedVehicle=null;renderList();}
 function setTab(tab){activeTab=tab;renderDetails();}
-function addHistory(type,data){const v=vehicles.find(x=>x.plate===selectedVehicle);v.history.push({type,...data});activeTab="History";renderDetails();}
-function toggleHistory(key){window.expanded[key]=!window.expanded[key];renderDetails();}
-function sortHistory(type,col){
-  const state=window.sortState[type]||{col,asc:true};
-  if(state.col===col){state.asc=!state.asc;}else{state.col=col;state.asc=true;}
-  window.sortState[type]=state;
-  const v=vehicles.find(x=>x.plate===selectedVehicle);
-  v.history=v.history.map(h=>({...h}));
-  v.history.sort((a,b)=>{
-    if(a.type!==type||b.type!==type) return 0;
-    const vals=Object.values(a),vals2=Object.values(b);
-    return state.asc?(vals[col]>vals2[col]?1:-1):(vals[col]<vals2[col]?1:-1);
-  });
-  renderDetails();
-}
-function exportHistory(type){
-  const v=vehicles.find(x=>x.plate===selectedVehicle);
-  const rows=v.history.filter(h=>h.type===type);
-  if(!rows.length) return;
-  const csv=[Object.keys(rows[0]).join(","),...rows.map(r=>Object.values(r).join(","))].join("\n");
-  const blob=new Blob([csv],{type:"text/csv"});
-  const url=URL.createObjectURL(blob);
-  const a=document.createElement("a");
-  a.href=url;a.download=`${selectedVehicle}_${type}_history.csv`;a.click();URL.revokeObjectURL(url);
-}
-
-// ------------------- FORMS -------------------
-function submitMaintenance(e){e.preventDefault();addHistory("Maintenance",Object.fromEntries(new FormData(e.target)));}
-function submitVehicleRequest(e){e.preventDefault();addHistory("Vehicle",Object.fromEntries(new FormData(e.target)));}
-function submitWhereabouts(e){e.preventDefault();const fd=new FormData(e.target);let place=fd.get("place");if(place==="Company Use")place+=" - "+fd.get("company");const v=vehicles.find(x=>x.plate===selectedVehicle);v.whereabouts=place;addHistory("Whereabouts",{place,date:new Date().toISOString().split("T")[0]});}
-function submitFuel(e){e.preventDefault();addHistory("Fuel",Object.fromEntries(new FormData(e.target)));}
-function submitReport(e){e.preventDefault();addHistory("Report",{file:e.target.report.value,date:new Date().toISOString().split("T")[0]});}
+function submitMaintenance(e){e.preventDefault();}
+function submitVehicleRequest(e){e.preventDefault();}
+function submitWhereabouts(e){e.preventDefault();}
+function submitFuel(e){e.preventDefault();}
+function submitReport(e){e.preventDefault();}
 
 // ------------------- INIT -------------------
 renderList();
-
-
-
