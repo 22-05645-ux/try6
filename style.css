@@ -28,7 +28,7 @@ body {
 }
 
 .clock {
-  font-size: 40px;        /* ← Make the clock text larger */
+  font-size: 30px;        /* ← Make the clock text larger */
   font-weight: bold;      /* ← Bold for better visibility */
   color: #FFFFFF;         /* ← Dark green color (change as you like) */
   text-align: right;      /* ← Align to right if in a header */
@@ -274,6 +274,7 @@ body {
     font-size: 13px;
   }
 }
+
 
 
 
