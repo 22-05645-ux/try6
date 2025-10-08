@@ -1,5 +1,5 @@
 // ------------------- DATA -------------------
-let vehicles = [
+let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
   { plate: "NGX 4853", whereabouts: "Batangas City", history: [] },
   { plate: "NGX 4856", whereabouts: "Batangas City", history: [] },
   { plate: "NFZ 2848", whereabouts: "Batangas City", history: [] },
@@ -55,6 +55,11 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
+// ------------------- STORAGE -------------------
+function saveData() {
+  localStorage.setItem("vehicles", JSON.stringify(vehicles));
+}
+
 // ------------------- RENDER -------------------
 function renderList() {
   app.innerHTML = "";
@@ -97,7 +102,7 @@ function renderDetails() {
   renderTab(v, d);
 }
 
-function renderTab(v,d) {
+function renderTab(v, d) {
   const tabContent = document.getElementById("tabContent");
 
   if (activeTab === "Details") {
@@ -107,17 +112,21 @@ function renderTab(v,d) {
       <p><b>Status:</b> ${d.status||"N/A"}</p>
       <p><b>Whereabouts:</b> ${v.whereabouts}</p>
     `;
-  } else if (activeTab === "Maintenance") {
+  }
+
+  else if (activeTab === "Maintenance") {
     tabContent.innerHTML = `
       <form onsubmit="submitMaintenance(event)">
         <input type="date" name="date" required />
         <input type="text" name="cv" placeholder="CV Number" required />
-        <input type="text" name="reason" placeholder="Reason" required />
-        <input type="number" name="cost" placeholder="Cost" required />
-        <button type="submit">Submit</button>
+        <input type="text" name="reason" placeholder="Reason / Description" required />
+        <input type="number" name="cost" placeholder="Cost / Amount" required />
+        <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Vehicle Request") {
+  }
+
+  else if (activeTab === "Vehicle Request") {
     tabContent.innerHTML = `
       <form onsubmit="submitVehicleRequest(event)">
         <input type="date" name="date" required />
@@ -127,10 +136,12 @@ function renderTab(v,d) {
         <input type="text" name="driver" placeholder="Driver" required />
         <input type="text" name="purpose" placeholder="Purpose" required />
         <input type="text" name="request" placeholder="Requested By" required />
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Whereabouts") {
+  }
+
+  else if (activeTab === "Whereabouts") {
     tabContent.innerHTML = `
       <form onsubmit="submitWhereabouts(event)">
         <select name="place" required>
@@ -141,10 +152,12 @@ function renderTab(v,d) {
           <option>Repair Shop</option>
         </select>
         <input type="text" name="company" placeholder="Destination (if Company Use)" />
-        <button type="submit">Update</button>
+        <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Fuel") {
+  }
+
+  else if (activeTab === "Fuel") {
     tabContent.innerHTML = `
       <form onsubmit="submitFuel(event)">
         <input type="date" name="date" required />
@@ -156,29 +169,88 @@ function renderTab(v,d) {
           <option>Gasoline</option>
         </select>
         <input type="number" name="amount" placeholder="Amount" required />
-        <button type="submit">Submit</button>
+        <button type="submit">Save</button>
       </form>
     `;
-  } else if (activeTab === "Reports") {
+  }
+
+  else if (activeTab === "Reports") {
     tabContent.innerHTML = `
       <form onsubmit="submitReport(event)">
         <input type="file" name="report" required />
         <button type="submit">Upload</button>
       </form>
     `;
-  } else if (activeTab === "History") {
-    tabContent.innerHTML = `<p>No history yet.</p>`;
+  }
+
+  else if (activeTab === "History") {
+    tabContent.innerHTML = v.history.length
+      ? v.history.map(h => `
+          <p><b>${h.type}</b> — ${Object.entries(h)
+            .filter(([k]) => k !== "type")
+            .map(([k,v]) => `${k}: ${v}`).join(", ")}</p>`).join("")
+      : `<p>No history yet.</p>`;
   }
 }
 
 // ------------------- HELPERS -------------------
-function backToList(){selectedVehicle=null;renderList();}
-function setTab(tab){activeTab=tab;renderDetails();}
-function submitMaintenance(e){e.preventDefault();}
-function submitVehicleRequest(e){e.preventDefault();}
-function submitWhereabouts(e){e.preventDefault();}
-function submitFuel(e){e.preventDefault();}
-function submitReport(e){e.preventDefault();}
+function backToList(){ selectedVehicle=null; renderList(); }
+function setTab(tab){ activeTab=tab; renderDetails(); }
+
+// ------------------- FORMS -------------------
+function submitMaintenance(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  const v = vehicles.find(x => x.plate === selectedVehicle);
+  v.history.push({ type: "Maintenance", ...data });
+  saveData();
+  alert("Maintenance record saved!");
+  setTab("History");
+}
+
+function submitVehicleRequest(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  const v = vehicles.find(x => x.plate === selectedVehicle);
+  v.history.push({ type: "Vehicle Request", ...data });
+  saveData();
+  alert("Vehicle request saved!");
+  setTab("History");
+}
+
+function submitWhereabouts(e) {
+  e.preventDefault();
+  const fd = new FormData(e.target);
+  const place = fd.get("place") === "Company Use"
+    ? `Company Use - ${fd.get("company")}`
+    : fd.get("place");
+  const v = vehicles.find(x => x.plate === selectedVehicle);
+  v.whereabouts = place;
+  v.history.push({ type: "Whereabouts", date: new Date().toISOString().split("T")[0], place });
+  saveData();
+  alert("Whereabouts updated!");
+  setTab("Details");
+}
+
+function submitFuel(e) {
+  e.preventDefault();
+  const data = Object.fromEntries(new FormData(e.target));
+  const v = vehicles.find(x => x.plate === selectedVehicle);
+  v.history.push({ type: "Fuel", ...data });
+  saveData();
+  alert("Fuel record saved!");
+  setTab("History");
+}
+
+function submitReport(e) {
+  e.preventDefault();
+  const file = e.target.report.value.split("\\").pop();
+  const v = vehicles.find(x => x.plate === selectedVehicle);
+  v.history.push({ type: "Report", date: new Date().toISOString().split("T")[0], file });
+  saveData();
+  alert("Report uploaded!");
+  setTab("History");
+}
 
 // ------------------- INIT -------------------
 renderList();
