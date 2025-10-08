@@ -15,17 +15,17 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
 ];
 
 const details = {
-  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", status: "Active" },
-  "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021", status: "Active" },
-  "NFZ 2848": { model: "Isuzu Traviz", yearBought: "2023", status: "Under Maintenance" },
-  "CBP 5511": { model: "Isuzu Elf Truck", yearBought: "2021", status: "Active" },
-  "CBP 1336": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "ZSG 105": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "UOF 225": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "NQX 657": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "WQT 225": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "MAM 7806": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
-  "NBO 6586": { model: "Isuzu Elf Truck", yearBought: "2023", status: "Under Maintenance" },
+  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", },
+  "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021",  },
+  "NFZ 2848": { model: "Isuzu Traviz", yearBought: "2023",  },
+  "CBP 5511": { model: "Isuzu Elf Truck", yearBought: "2021",  },
+  "CBP 1336": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "ZSG 105": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "UOF 225": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "NQX 657": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "WQT 225": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "MAM 7806": { model: "Isuzu Elf Truck", yearBought: "2023",  },
+  "NBO 6586": { model: "Isuzu Elf Truck", yearBought: "2023",  },
   "EMPTY": { model: "Unknown", yearBought: "N/A", status: "Inactive" },
 };
 
@@ -332,4 +332,5 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
