@@ -74,7 +74,6 @@ function renderList() {
     card.innerHTML = `
       <img src="${imgUrl}" alt="${v.plate}" />
       <h2>${v.plate}</h2>
-      <div class="status ${statusClass}">${d.status}</div>
       <p>Whereabouts: ${v.whereabouts}</p>
     `;
     card.onclick = () => { selectedVehicle = v.plate; activeTab = "Details"; renderDetails(); };
