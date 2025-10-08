@@ -1,112 +1,80 @@
-/* ------------------- GLOBAL ------------------- */
 body {
+  font-family: Arial, sans-serif;
+  background-color: #eaf5ec;
   margin: 0;
-  font-family: 'Segoe UI', Roboto, sans-serif;
-  background: #f9fafb;
-  color: #111827;
-  font-size: 16px;
-  line-height: 1.6;
+  padding: 0;
 }
 
-/* ------------------- HEADER ------------------- */
+/* HEADER */
 .header {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  background: linear-gradient(90deg, #228B22, #009E60);
+  background-color: #0b6623;
   color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 18px 30px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-  z-index: 100;
+  padding: 10px 20px;
 }
 
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 16px;
 }
 
 .logo {
-  height: 60px;
-  width: 60px;
-  border-radius: 12px;
-  background: white;
-  padding: 6px;
-}
-
-.header h1 {
-  font-size: 26px;
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 6px;
 }
 
 .clock {
-  font-family: monospace;
-  font-size: 20px;
   font-weight: bold;
 }
 
-/* ------------------- CONTAINER ------------------- */
-.container {
-  padding: 120px 30px 70px;
-  max-width: 1400px;
-  margin: auto;
+/* FOOTER */
+.footer {
+  text-align: center;
+  padding: 10px;
+  background-color: #0b6623;
+  color: white;
 }
 
-/* ------------------- GRID CARDS ------------------- */
+/* VEHICLE GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-  margin-top: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  padding: 20px;
 }
 
 .card {
-  background: white;
-  padding: 15px;
+  background-color: white;
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 12px;
   text-align: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: 0.3s;
   cursor: pointer;
-  transition: transform 0.2s;
 }
 
 .card:hover {
-  transform: scale(1.05);
+  transform: scale(1.03);
 }
 
 .card img {
   width: 100%;
-  max-height: 150px;
-  object-fit: contain;
-  margin-bottom: 10px;
+  max-width: 180px;
 }
 
-.card h2 {
-  margin: 10px 0 5px;
-  font-size: 20px;
-  color: #065f46;
-}
-
-.card p {
-  font-size: 15px;
-  color: #374151;
-}
-
-/* ------------------- DETAILS PAGE ------------------- */
+/* DETAILS PAGE */
 .details-container {
   background: #f5fef8;
   padding: 25px;
   border-radius: 12px;
   box-shadow: 0 3px 8px rgba(0,0,0,0.1);
-  max-width: 800px;
+  max-width: 850px;
   margin: 40px auto;
   text-align: center;
-}
-
-.details-container h1 {
-  color: #064e3b;
-  margin-bottom: 10px;
 }
 
 .details-image {
@@ -117,7 +85,6 @@ body {
   display: block;
 }
 
-/* Tabs */
 .tab-buttons {
   display: flex;
   flex-wrap: wrap;
@@ -146,7 +113,6 @@ body {
   color: white;
 }
 
-/* Forms and text */
 #tabContent form {
   display: flex;
   flex-direction: column;
@@ -178,13 +144,7 @@ body {
   background: #145c2b;
 }
 
-#tabContent p {
-  font-size: 16px;
-  color: #333;
-  margin: 6px 0;
-}
-
-/* Back Button */
+/* BACK BUTTON */
 .back-btn {
   background: #f5f5f5;
   border: 1px solid #ccc;
@@ -194,10 +154,12 @@ body {
   font-weight: bold;
   margin-bottom: 10px;
 }
+
 .back-btn:hover {
   background: #e2e8f0;
 }
 
+/* HISTORY TABLE SECTIONS */
 .history-section {
   margin-top: 15px;
   border: 1px solid #ccc;
@@ -210,13 +172,24 @@ body {
   color: white;
   font-weight: bold;
   padding: 8px 12px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s ease;
+}
+
+.history-header:hover {
+  background-color: #145e26;
+}
+
+.history-body {
+  display: block;
+  background-color: #f8fff8;
 }
 
 .history-group-table {
   width: 100%;
   border-collapse: collapse;
   font-size: 14px;
-  background-color: #f8fff8;
 }
 
 .history-group-table th,
@@ -224,6 +197,7 @@ body {
   border: 1px solid #c8e6c9;
   padding: 6px 10px;
   text-align: left;
+  vertical-align: top;
 }
 
 .history-group-table th {
@@ -232,6 +206,7 @@ body {
   font-weight: 600;
 }
 
+/* EXPORT BUTTON */
 .export-btn {
   background: #1a7431;
   color: white;
@@ -242,14 +217,25 @@ body {
   margin-bottom: 8px;
 }
 
-/* ------------------- FOOTER ------------------- */
-.footer {
-  background: #064e3b;
-  color: rgb(255, 255, 255);
-  text-align: center;
-  padding: 14px;
-  font-size: 15px;
-  position: fixed;
-  bottom: 0; left: 0; right: 0;
+.export-btn:hover {
+  background: #145e26;
 }
 
+/* EDIT / DELETE BUTTONS */
+.edit-btn, .del-btn {
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  background: transparent;
+  margin: 0 4px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+
+.edit-btn:hover { background:#eef7ef; color: #0b6623; }
+.del-btn:hover { background:#fff5f5; color: #a11; }
+
+@media (max-width: 700px) {
+  .history-group-table th, .history-group-table td { font-size: 13px; padding: 6px; }
+  .details-image { max-width: 220px; }
+}
