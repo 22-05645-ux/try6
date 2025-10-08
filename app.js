@@ -68,12 +68,6 @@ function renderList() {
   vehicles.forEach(v => {
     const imgUrl = vehicleImages[v.plate];
     const d = details[v.plate];
-    let statusClass =
-      d.status === "Active"
-        ? "status-active"
-        : d.status === "Under Maintenance"
-        ? "status-maintenance"
-        : "status-inactive";
 
     const card = document.createElement("div");
     card.className = "card";
@@ -332,5 +326,6 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
