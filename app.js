@@ -26,7 +26,7 @@ const details = {
   "WQT 225": { model: "Isuzu Elf Truck", yearBought: "2023",  },
   "MAM 7806": { model: "Isuzu Elf Truck", yearBought: "2023",  },
   "NBO 6586": { model: "Isuzu Elf Truck", yearBought: "2023",  },
-  "EMPTY": { model: "Unknown", yearBought: "N/A", status: "Inactive" },
+  "EMPTY": { model: "Unknown", yearBought: "N/A",  },
 };
 
 const vehicleImages = {
@@ -325,6 +325,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
