@@ -245,24 +245,12 @@ function generateRow(type, r) {
       cells = `<td>${r.date}</td><td>${JSON.stringify(r)}</td>`;
   }
   return `<tr>${cells}<td>
-    <button class='edit-btn' onclick="editRecord('${r.index}')">✏️</button>
-    <button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button>
-  </td></tr>`;
+  <button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button>
+</td>
+</tr>`;
 }
 
 // ------------------- EDIT / DELETE -------------------
-function editRecord(index) {
-  const v = vehicles.find(x => x.plate === selectedVehicle);
-  const record = v.history[index];
-  const newData = prompt(`Edit entry:\n\n${JSON.stringify(record, null, 2)}`);
-  if (!newData) return;
-  try {
-    v.history[index] = { ...record, ...JSON.parse(newData) };
-    saveAndRefresh("History");
-  } catch {
-    alert("Invalid JSON format. Edit cancelled.");
-  }
-}
 
 function deleteRecord(index) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
@@ -347,3 +335,4 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
