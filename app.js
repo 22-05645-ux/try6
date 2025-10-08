@@ -254,21 +254,30 @@ function toggleHistory(type) {
 }
 
 // ------------------- EXPORT CSV -------------------
-function exportCSV(plate) {
+// ------------------- EXPORT CSV PER TAB -------------------
+function exportCSV(plate, type) {
   const v = vehicles.find(x => x.plate === plate);
-  if (!v || !v.history.length) return alert("No history to export.");
-  const keys = Array.from(new Set(v.history.flatMap(Object.keys)));
+  if (!v) return alert("Vehicle not found.");
+
+  // Filter only the records that match the tab type
+  const filtered = v.history.filter(h => h.type === type);
+  if (!filtered.length) return alert(`No ${type} records to export.`);
+
+  const keys = Array.from(new Set(filtered.flatMap(Object.keys)));
   const rows = [keys.join(",")];
-  v.history.forEach(entry => {
+
+  filtered.forEach(entry => {
     const row = keys.map(k => `"${(entry[k] ?? "").toString().replace(/"/g, '""')}"`);
     rows.push(row.join(","));
   });
+
   const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
   link.href = URL.createObjectURL(blob);
-  link.download = `${plate}_history.csv`;
+  link.download = `${plate}_${type}_records.csv`;
   link.click();
 }
+
 
 // ------------------- FORMS -------------------
 function submitMaintenance(e) {
@@ -316,4 +325,5 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
