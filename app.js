@@ -15,7 +15,7 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
 ];
 
 const details = {
-  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", status: "Active" },
+  "NGX 4853": { model: "Mitsubishi L300", yearBought: "2022", status: "Active" },
   "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021", status: "Active" },
   "NFZ 2848": { model: "Isuzu Traviz", yearBought: "2023", status: "Under Maintenance" },
   "CBP 5511": { model: "Isuzu Elf Truck", yearBought: "2021", status: "Active" },
@@ -184,18 +184,30 @@ function renderTab(v, d) {
   }
 
   else if (activeTab === "History") {
+    if (!v.history.length) {
+      tabContent.innerHTML = `<p>No history yet.</p>`;
+      return;
+    }
+
+    const rows = v.history.map(h => {
+      const date = h.date || "—";
+      const details = Object.entries(h)
+        .filter(([k]) => !["type", "date"].includes(k))
+        .map(([k, val]) => `<b>${k}:</b> ${val}`)
+        .join("<br>");
+      return `<tr><td>${h.type}</td><td>${date}</td><td>${details}</td></tr>`;
+    }).join("");
+
     tabContent.innerHTML = `
-      <button onclick="exportCSV('${v.plate}')" style="margin-bottom:10px;background:#1a7431;color:white;border:none;padding:8px 14px;border-radius:5px;cursor:pointer;">
-        📥 Export CSV
-      </button>
-      ${
-        v.history.length
-          ? v.history.map(h => `
-            <p><b>${h.type}</b> — ${Object.entries(h)
-              .filter(([k]) => k !== "type")
-              .map(([k,v]) => `${k}: ${v}`).join(", ")}</p>`).join("")
-          : `<p>No history yet.</p>`
-      }
+      <button onclick="exportCSV('${v.plate}')" class="export-btn">📥 Export CSV</button>
+      <div class="table-container">
+        <table class="history-table">
+          <thead>
+            <tr><th>Type</th><th>Date</th><th>Details</th></tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>
     `;
   }
 }
@@ -213,24 +225,18 @@ function exportCSV(plate) {
     return;
   }
 
-  // Prepare headers
   const keys = Array.from(new Set(v.history.flatMap(Object.keys)));
   const rows = [keys.join(",")];
-
-  // Rows
   v.history.forEach(entry => {
     const row = keys.map(k => `"${(entry[k] ?? "").toString().replace(/"/g, '""')}"`);
     rows.push(row.join(","));
   });
 
-  const csvContent = rows.join("\n");
-  const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
-  const url = URL.createObjectURL(blob);
+  const blob = new Blob([rows.join("\n")], { type: "text/csv;charset=utf-8;" });
   const link = document.createElement("a");
-  link.href = url;
+  link.href = URL.createObjectURL(blob);
   link.download = `${plate}_history.csv`;
   link.click();
-  URL.revokeObjectURL(url);
 }
 
 // ------------------- FORMS -------------------
@@ -240,7 +246,6 @@ function submitMaintenance(e) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Maintenance", ...data });
   saveAndRefresh("History");
-  alert("Maintenance record saved!");
 }
 
 function submitVehicleRequest(e) {
@@ -249,7 +254,6 @@ function submitVehicleRequest(e) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Vehicle Request", ...data });
   saveAndRefresh("History");
-  alert("Vehicle request saved!");
 }
 
 function submitWhereabouts(e) {
@@ -262,7 +266,6 @@ function submitWhereabouts(e) {
   v.whereabouts = place;
   v.history.push({ type: "Whereabouts", date: new Date().toISOString().split("T")[0], place });
   saveAndRefresh("Details");
-  alert("Whereabouts updated!");
 }
 
 function submitFuel(e) {
@@ -271,7 +274,6 @@ function submitFuel(e) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Fuel", ...data });
   saveAndRefresh("History");
-  alert("Fuel record saved!");
 }
 
 function submitReport(e) {
@@ -280,9 +282,7 @@ function submitReport(e) {
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Report", date: new Date().toISOString().split("T")[0], file });
   saveAndRefresh("History");
-  alert("Report uploaded!");
 }
 
 // ------------------- INIT -------------------
 renderList();
-
