@@ -1,6 +1,6 @@
 // ------------------- DATA -------------------
 let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
-  { plate: "NGX 4853", whereabouts: "Batangas City", history: [] },
+  { plate: "NGX 4853", whereabouts: "Makati", history: [] },
   { plate: "NGX 4856", whereabouts: "Batangas City", history: [] },
   { plate: "NFZ 2848", whereabouts: "Batangas City", history: [] },
   { plate: "CBP 5511", whereabouts: "Batangas City", history: [] },
@@ -324,6 +324,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
