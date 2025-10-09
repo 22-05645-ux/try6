@@ -450,6 +450,7 @@ function renderTab(v, d) {
           <option>Gasoline</option>
         </select>
         <input type="number" name="amount" placeholder="Amount" required />
+        <input type="text" name="jo" placeholder="Job Order" required/>
         <button type="submit">Save</button>
       </form>
     `;
@@ -523,7 +524,7 @@ function exportCSV(plate, type) {
 function generateHeaders(type) {
   switch (type) {
     case "Maintenance": return "<th>Date</th><th>CV No.</th><th>Reason / Description</th><th>Cost / Amount</th>";
-    case "Fuel": return "<th>Date</th><th>Bearer</th><th>PO #</th><th>Fuel Type</th><th>Amount</th>";
+    case "Fuel": return "<th>Date</th><th>Bearer</th><th>PO #</th><th>Fuel Type</th><th>Amount</th><th>Job Order</th>";
     case "Vehicle Request": return "<th>Date</th><th>Project</th><th>Job Order #</th><th>Location</th><th>Driver</th><th>Purpose</th><th>Requested By</th>";
     case "Whereabouts": return "<th>Date</th><th>Place</th>";
     case "Report": return "<th>Date</th><th>File</th>";
@@ -535,7 +536,7 @@ function generateRow(type, r) {
   let cells = "";
   switch (type) {
     case "Maintenance": cells = `<td>${r.date}</td><td>${r.cv}</td><td>${r.reason}</td><td>₱${r.cost}</td>`; break;
-    case "Fuel": cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td>`; break;
+    case "Fuel": cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td>`<td>${r.jo}</td>; break;
     case "Vehicle Request": cells = `<td>${r.date}</td><td>${r.project}</td><td>${r.from}</td><td>${r.to}</td><td>${r.driver}</td><td>${r.purpose}</td><td>${r.request}</td>`; break;
     case "Whereabouts": cells = `<td>${r.date}</td><td>${r.place}</td>`; break;
     case "Report": cells = `<td>${r.date}</td><td>${r.file}</td>`; break;
@@ -610,6 +611,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
