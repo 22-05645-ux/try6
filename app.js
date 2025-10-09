@@ -1,6 +1,6 @@
 // ------------------- DATA -------------------
 let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
-  { plate: "NGX 4853", whereabouts: "Makati", history: [] },
+  { plate: "NGX 4853", whereabouts: "Batangas City", history: [] },
   { plate: "NGX 4856", whereabouts: "Batangas City", history: [] },
   { plate: "NFZ 2848", whereabouts: "Batangas City", history: [] },
   { plate: "CBP 5511", whereabouts: "Batangas City", history: [] },
@@ -39,7 +39,7 @@ const details = {
                EasyTrip: "5200-1890-1081",
               OR:"1368-000000116000",
              },
-  "NGX 4853": { model: "l300", 
+  "NGX 4853": { model: "Mitsubishi L300", 
                yearModel: "", 
                color: "white", 
                FuelType: "", 
@@ -63,7 +63,7 @@ const details = {
                EasyTrip: "5400-0010-2233",
                OR: "1902357332",
               },
-  "NGX 4856": { model: "l300", 
+  "NGX 4856": { model: "Mitsubishi L300", 
                yearModel: "", 
                color: "white", 
                FuelType: "", 
@@ -86,7 +86,7 @@ const details = {
                AutoSweep: "F883794",
                EasyTrip: "5400-0023-1590",
               },
-  "NFZ 2848": { model: "traviz", 
+  "NFZ 2848": { model: "ISUZU Traviz", 
                yearModel: "", 
                color: "white", 
                FuelType: "", 
@@ -109,7 +109,7 @@ const details = {
                AutoSweep: "R333835",
                EasyTrip: "",
               },
-  "CBP 5511": { model: "REBUILT ISUZE PWRGATE DROPSIDEW/ PTG TRUCK", 
+  "CBP 5511": { model: "REBUILT ISUZE PWRGATE DROPSIDE W/ PTG TRUCK", 
                yearModel: "2021", 
                color: "White", 
                FuelType: "Diesel", 
@@ -157,7 +157,7 @@ const details = {
                EasyTrip: "5400-0013-9874",
                OR:"0404-000000095320",
               },
-  "ZSG 105": { model: "L300", 
+  "ZSG 105": { model: "Mitsubishi L300", 
               yearModel: "", 
               color: "White", 
               FuelType: "", 
@@ -611,6 +611,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
