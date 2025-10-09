@@ -146,6 +146,10 @@ function renderTab(v, d) {
       <tr>
         <th>TIN:</th><td>${d.tin || "N/A"}</td>
         <th></th><td></td>
+        <tr>
+        <th>Shipping Weight:</th><td>${d.ShippingWt || "N/A"}</td>
+        <th>Net Capacity:</th><td>${d.NetCapcity || "N/A"}</td>
+      </tr>
       </tr>
     </table>
   `;
@@ -363,6 +367,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
