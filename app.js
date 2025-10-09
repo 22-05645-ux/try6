@@ -352,6 +352,10 @@ function renderTab(v, d) {
         <th>Year Model:</th><td>${d.yearModel || d.yearBought || "N/A"}</td>
       </tr>
       <tr>
+        <th>AutoSweep No.:</th><td>${d.AutoSweep || "N/A"}</td>
+        <th>Easy Trip No.:</th><td>${d.EasyTrip || "N/A"}</td>
+      </tr>
+      <tr>
         <th>Color:</th><td>${d.Color || d.color || "N/A"}</td>
         <th>Fuel Type:</th><td>${d.FuelType || "N/A"}</td>
       </tr>
@@ -385,7 +389,7 @@ function renderTab(v, d) {
       </tr>
       <tr>
         <th>TIN:</th><td>${d.tin || "N/A"}</td>
-        <th></th><td></td>
+        <th>Account Number:</th><td>${d.AccountNumber || "N/A"}</td>
       </tr>
     </table>
   `;
@@ -603,6 +607,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
