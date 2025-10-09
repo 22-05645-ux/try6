@@ -42,7 +42,8 @@ body {
   padding: 15px;
   background-color: #0b6623;
   color: white;
-   margin: 0;
+  margin-top: auto;
+  font-size: 14px;
 }
 
 /* VEHICLE GRID */
@@ -275,6 +276,7 @@ body {
     font-size: 13px;
   }
 }
+
 
 
 
