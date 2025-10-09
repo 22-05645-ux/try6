@@ -131,7 +131,7 @@ const details = {
                AccountNumber:"2402191",
                AutoSweep: "F897407",
                EasyTrip: "",
-               OR:"2187876950"
+               OR:"2187876950",
               },
   "CBP 1336": { model: "", 
                yearModel: "", 
@@ -607,6 +607,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
