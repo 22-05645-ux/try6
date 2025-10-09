@@ -144,12 +144,12 @@ function renderTab(v, d) {
         <th>Chassis No.:</th><td>${d.ChassisNo || "N/A"}</td>
       </tr>
       <tr>
-        <th>TIN:</th><td>${d.tin || "N/A"}</td>
-        <th></th><td></td>
-        <tr>
         <th>Shipping Weight:</th><td>${d.ShippingWt || "N/A"}</td>
         <th>Net Capacity:</th><td>${d.NetCapacity || "N/A"}</td>
       </tr>
+      <tr>
+        <th>TIN:</th><td>${d.tin || "N/A"}</td>
+        <th></th><td></td>
       </tr>
     </table>
   `;
@@ -367,6 +367,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
