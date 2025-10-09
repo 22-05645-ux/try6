@@ -276,7 +276,7 @@ const vehicleImages = {
   "CBP 1336": "https://carused.jp/images/elf/flatbody.jpg",
   "ZSG 105": "https://alpinemotors.com.ph/wp-content/uploads/2021/05/L300.png",
   "UOF 225": "https://www.isuzu-gencars.com.ph/wp-content/uploads/2020/07/Isuzu-TRAVIZ-Utility-Van-222-scaled.jpg",
-  "NQX 657": "https://www.carmag.co.za/wp-content/uploads/2023/10/Isuzu-D-Max-edit-2-800x480.png",
+  "NQX 657": "https://favpng.com/png_view/car-isuzu-d-max-car-isuzu-faster-pickup-truck-png/2LEXBavJ",
   "WQT 225": "https://alpinemotors.com.ph/wp-content/uploads/2021/05/L300.png",
   "MAM 7806": "https://carused.jp/images/elf/flatbody.jpg",
   "NBO 6586": "https://www.isuzu-gencars.com.ph/wp-content/uploads/2020/07/Isuzu-TRAVIZ-Utility-Van-222-scaled.jpg",
@@ -607,6 +607,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
