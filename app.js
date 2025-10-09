@@ -15,7 +15,7 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
 ];
 
 const details = {
-  "WQT 225": { model: "Mitsubishi L300 Exceed 2.5 FB", yearModel: "2013", color: "Polar White", FuelType: "Diesel", Classification:"Private-(PVT)", VehicleType: "Utility Vehicle FB", Aircon: "Non-Aircon", 
+  "WQT 225": { model: "Mitsubishi L300 Exceed 2.5 FB", yearModel: "2013", Color: "Polar White", FuelType: "Diesel", Classification:"Private-(PVT)", VehicleType: "Utility Vehicle FB", Aircon: "Non-Aircon", 
              GrossWt:"3200", NetWt: "1600", ShippingWt: "1600", NetCapacity: "1600", EngineNo:"4D56AAH7453", MVFILENO:"1336-00000382369", CRNO: "178100495", PistonDisplacement: "2477", NoofCylinders: "4", ChassisNo:"", LTOclientId:"C-22-0070546", tin: "000-003-934-488", },
   "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", },
   "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021",  },
@@ -112,11 +112,11 @@ function renderTab(v, d) {
     tab.innerHTML = `
       <p><b>Model:</b> ${d.model}</p>
       <p><b>Year Model:</b> ${d.yearModel}</p>
-      <p><b>Color:</b> ${v.color}</p>
-      <p><b>Fuel Type:</b> ${v.FuelType}</p>
+      <p><b>Color:</b> ${d.Color}</p>
+      <p><b>Fuel Type:</b> ${d.FuelType}</p>
       <p><b>Classification:</b> ${d.Classification}</p>
       <p><b>Vehicle Type:</b> ${d.VehicleType}</p>
-      <p><b>Aircon:</b> ${v.Aircon}</p>
+      <p><b>Aircon:</b> ${d.Aircon}</p>
     `;
   } 
   else if (activeTab === "Maintenance") {
@@ -331,6 +331,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
