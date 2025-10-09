@@ -109,16 +109,27 @@ function renderTab(v, d) {
   const tab = document.getElementById("tabContent");
 
   if (activeTab === "Details") {
-    tab.innerHTML = `
-      <p><b>Model:</b> ${d.model}</p>
-      <p><b>Year Model:</b> ${d.yearModel}</p>
-      <p><b>Color:</b> ${d.Color}</p>
-      <p><b>Fuel Type:</b> ${d.FuelType}</p>
-      <p><b>Classification:</b> ${d.Classification}</p>
-      <p><b>Vehicle Type:</b> ${d.VehicleType}</p>
-      <p><b>Aircon:</b> ${d.Aircon}</p>
-    `;
-  } 
+  tab.innerHTML = `
+    <table class="details-table">
+      <tr>
+        <th>Model:</th><td>${d.model}</td>
+        <th>Year Model:</th><td>${d.yearModel}</td>
+      </tr>
+      <tr>
+        <th>Color:</th><td>${d.Color}</td>
+        <th>Fuel Type:</th><td>${d.FuelType}</td>
+      </tr>
+      <tr>
+        <th>Classification:</th><td>${d.Classification}</td>
+        <th>Vehicle Type:</th><td>${d.VehicleType}</td>
+      </tr>
+      <tr>
+        <th>Aircon:</th><td>${d.Aircon}</td>
+        <th></th><td></td>
+      </tr>
+    </table>
+  `;
+  }
   else if (activeTab === "Maintenance") {
     tab.innerHTML = `
       <form onsubmit="submitMaintenance(event)">
@@ -331,6 +342,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
