@@ -109,7 +109,6 @@ function renderTab(v, d) {
     tab.innerHTML = `
       <p><b>Model:</b> ${d.model}</p>
       <p><b>Year Bought:</b> ${d.yearBought}</p>
-      <p><b>Status:</b> ${d.status}</p>
       <p><b>Whereabouts:</b> ${v.whereabouts}</p>
     `;
   } 
@@ -325,6 +324,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
