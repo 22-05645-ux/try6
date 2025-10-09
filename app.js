@@ -391,6 +391,9 @@ function renderTab(v, d) {
         <th>TIN:</th><td>${d.tin || "N/A"}</td>
         <th>Account Number:</th><td>${d.AccountNumber || "N/A"}</td>
       </tr>
+      <tr>
+      <th>OR No.:</th><td>${d.OR || "N/A"}</td>
+      </tr>
     </table>
   `;
 }
@@ -607,6 +610,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
