@@ -112,24 +112,45 @@ function renderTab(v, d) {
   tab.innerHTML = `
     <table class="details-table">
       <tr>
-        <th>Model:</th><td>${d.model}</td>
-        <th>Year Model:</th><td>${d.yearModel}</td>
+        <th>Model:</th><td>${d.model || "N/A"}</td>
+        <th>Year Model:</th><td>${d.yearModel || d.yearBought || "N/A"}</td>
       </tr>
       <tr>
-        <th>Color:</th><td>${d.Color}</td>
-        <th>Fuel Type:</th><td>${d.FuelType}</td>
+        <th>Color:</th><td>${d.Color || d.color || "N/A"}</td>
+        <th>Fuel Type:</th><td>${d.FuelType || "N/A"}</td>
       </tr>
       <tr>
-        <th>Classification:</th><td>${d.Classification}</td>
-        <th>Vehicle Type:</th><td>${d.VehicleType}</td>
+        <th>Classification:</th><td>${d.Classification || "N/A"}</td>
+        <th>Vehicle Type:</th><td>${d.VehicleType || "N/A"}</td>
       </tr>
       <tr>
-        <th>Aircon:</th><td>${d.Aircon}</td>
+        <th>Aircon:</th><td>${d.Aircon || "N/A"}</td>
+        <th>LTO Client ID:</th><td>${d.LTOclientId || d.LTOClientID || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>Gross Weight:</th><td>${d.GrossWt || "N/A"}</td>
+        <th>Net Weight:</th><td>${d.NetWt || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>Engine No.:</th><td>${d.EngineNo || "N/A"}</td>
+        <th>CR No.:</th><td>${d.CRNO || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>MV FILE NO.:</th><td>${d.MVFILENO || "N/A"}</td>
+        <th>Piston Displacement:</th><td>${d.PistonDisplacement || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>No. of Cylinders:</th><td>${d.NoofCylinders || "N/A"}</td>
+        <th>Chassis No.:</th><td>${d.ChassisNo || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>TIN:</th><td>${d.tin || "N/A"}</td>
         <th></th><td></td>
       </tr>
     </table>
   `;
-  }
+}
+
   else if (activeTab === "Maintenance") {
     tab.innerHTML = `
       <form onsubmit="submitMaintenance(event)">
@@ -342,6 +363,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
