@@ -16,7 +16,7 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
 
 const details = {
   "WQT 225": { model: "Mitsubishi L300 Exceed 2.5 FB", yearModel: "2013", color: "Polar White", FuelType: "Diesel", Classification:"Private-(PVT)", VehicleType: "Utility Vehicle FB", Aircon: "Non-Aircon", 
-             GrossWt:"3200", NetWt: "1600", ShippingWt: "1600", NetCapacity: "1600", EngineNo:"4D56AAH7453", MVFILENO:"1336-00000382369", CRNO: "178100495", PistonDisplacement: "2477", NoofCylinders: "4", ChassisNo:"", LTOclientId:"C-22-0070546", tin: "000-003-934-488"},
+             GrossWt:"3200", NetWt: "1600", ShippingWt: "1600", NetCapacity: "1600", EngineNo:"4D56AAH7453", MVFILENO:"1336-00000382369", CRNO: "178100495", PistonDisplacement: "2477", NoofCylinders: "4", ChassisNo:"", LTOclientId:"C-22-0070546", tin: "000-003-934-488", },
   "NGX 4853": { model: "Mitsubishi L300", yearBought: "2025", },
   "NGX 4856": { model: "Mitsubishi L300", yearBought: "2021",  },
   "NFZ 2848": { model: "Isuzu Traviz", yearBought: "2023",  },
@@ -28,7 +28,8 @@ const details = {
   
   "MAM 7806": { model: "Isuzu Elf Truck", yearBought: "2023",  },
   "NBO 6586": { model: "Isuzu Elf Truck", yearBought: "2023", LTOClientID: "C-22-0070546", yearModel: "2018", color: "Arc White", FuelType: "Diesel", Classification:"Private-(PVT)", VehicleType: "Utility Vehicle PASSENGER VAN", Aircon: "Non-Aircon",   },
-  "EMPTY": { model: "Unknown", yearBought: "N/A",  },
+  "EMPTY": { model: "", yearModel: "", color: "", FuelType: "", Classification:"", VehicleType: "", Aircon: "", 
+             GrossWt:"", NetWt: "", ShippingWt: "", NetCapacity: "", EngineNo:"", MVFILENO:"", CRNO: "", PistonDisplacement: "", NoofCylinders: "", ChassisNo:"", LTOclientId:"", tin: "", },
 };
 
 const vehicleImages = {
@@ -330,6 +331,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
