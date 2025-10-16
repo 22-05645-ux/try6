@@ -91,37 +91,43 @@ main {
 
 .card {
   background-color: white;
-  border-radius: 12px;
-  padding: 20px 20px;
+  border-radius: 14px;
+  padding: 25px;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
+  width: 100%;
+  max-width: 280px;       /* ✅ Uniform width */
+  min-height: 360px;      /* ✅ Uniform height */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* space between content */
 }
 
 .card:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  transform: scale(1.06);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .card img {
-  width: 90%;
-  height: auto;
-  max-width: 220px;
-  margin: 10px auto 20px;
-  display: block;
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-bottom: 15px;
+  border-radius: 8px;
 }
 
 .card h2 {
   margin: 5px 0;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: bold;
   color: #000;
 }
 
 .card p {
-  font-size: 14px;
-  color: #222;
+  font-size: 15px;
+  color: #333;
   margin: 0;
 }
 
@@ -358,3 +364,4 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
