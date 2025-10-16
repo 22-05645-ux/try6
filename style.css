@@ -59,15 +59,34 @@ main {
   margin-top: auto; /* ✅ Keeps footer at bottom */
 }
 
-/* VEHICLE GRID */
+/* VEHICLE GRID — fixed to 4x3 layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr));
+  grid-template-columns: repeat(4, 1fr);  /* ✅ 4 columns per row */
   grid-auto-rows: auto;
   gap: 25px;
   padding: 30px;
-  justify-items: center;
-  align-items: start;
+  justify-items: center;  /* center cards horizontally */
+  align-items: start;     /* align cards neatly at the top */
+}
+
+/* 📱 Responsive design: adjust column count for smaller screens */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr); /* 3 columns for medium screens */
+  }
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columns for tablets */
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr; /* 1 column for phones */
+  }
 }
 
 .card {
@@ -277,22 +296,6 @@ main {
   color: #a11;
 }
 
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
-  }
-  .card img {
-    max-width: 150px;
-  }
-  .card h2 {
-    font-size: 15px;
-  }
-  .card p {
-    font-size: 13px;
-  }
-}
-
 /* VEHICLE DETAILS TABLE (2-COLUMN RESPONSIVE) */
 .details-table {
   width: 100%;
@@ -355,18 +358,3 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
-
-@media (max-width: 700px) {
-  .grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: 15px;
-  }
-}
-
-
-
-
-
-
-
-
