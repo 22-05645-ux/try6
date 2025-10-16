@@ -335,7 +335,7 @@ main {
   }
 
   .details-table th {
-    background: #1a7431;
+    background: #05f041;
     color: white;
     padding: 8px 12px;
     border-radius: 6px 6px 0 0;
@@ -352,5 +352,6 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
