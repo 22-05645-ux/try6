@@ -263,8 +263,6 @@ const details = {
                AutoSweep: "R415774",
                EasyTrip: "5200-2566-4138",
               },
-  "EMPTY": { model: "", yearModel: "", color: "", FuelType: "", Classification:"", VehicleType: "", Aircon: "", 
-             GrossWt:"", NetWt: "", ShippingWt: "", NetCapacity: "", EngineNo:"", MVFILENO:"", CRNO: "", PistonDisplacement: "", NoofCylinders: "", ChassisNo:"", LTOclientId:"", tin: "", },
 };
 
 const vehicleImages = {
@@ -279,7 +277,6 @@ const vehicleImages = {
   "WQT 225": "https://alpinemotors.com.ph/wp-content/uploads/2021/05/L300.png",
   "MAM 7806": "https://carused.jp/images/elf/flatbody.jpg",
   "NBO 6586": "https://www.isuzu-gencars.com.ph/wp-content/uploads/2020/07/Isuzu-TRAVIZ-Utility-Van-222-scaled.jpg",
-  "EMPTY": "https://media.licdn.com/dms/image/D560BAQGwtTvFVA5e_Q/company-logo_200_200/0/1697595933193?e=2147483647&v=beta&t=kOA11OZMk-StnPS_3-MpbicPzWtUTavPSMqPgvYGEuc"
 };
 
 const app = document.getElementById("app");
@@ -607,6 +604,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
