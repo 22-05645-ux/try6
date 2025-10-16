@@ -110,34 +110,35 @@ main {
 .card {
   background-color: white;
   border-radius: 14px;
-  padding: 25px;
-  text-align: center;
+  padding: 20px;
+  text-align: left;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   width: 100%;
-  max-width: 280px;       /* ✅ Uniform width */
-  min-height: 360px;      /* ✅ Uniform height */
+  max-width: 400px;       /* ✅ Uniform width */
+  min-height: 220px;      /* ✅ Uniform height */
   display: flex;
-  flex-direction: column;
-  justify-content: space-between; /* space between content */
+  align-items: center;
+  justify-content: flex-start;/* space between content */
+  gap: 20px;
 }
 
 .card:hover {
-  transform: scale(1.06);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  transform: scale(1.04);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
 }
 
 .card img {
-  width: 100%;
-  height: 180px;
+  width: 180px;
+  height: 120px;
   object-fit: contain;
-  margin-bottom: 15px;
-  border-radius: 8px;
+  margin-bottom: 8px;
+  flex-shrink: 0;
 }
 
 .card h2 {
-  margin: 5px 0;
+  margin: 0;
   font-size: 20px;
   font-weight: bold;
   color: #000;
@@ -146,7 +147,7 @@ main {
 .card p {
   font-size: 15px;
   color: #333;
-  margin: 0;
+  margin-top: 5px;
 }
 
 /* BACK BUTTON */
@@ -382,5 +383,6 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
