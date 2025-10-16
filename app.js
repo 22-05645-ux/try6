@@ -347,48 +347,48 @@ function renderTab(v, d) {
   tab.innerHTML = `
     <table class="details-table">
       <tr>
-        <th>Model:</th><td>${d.model || "N/A"}</td>
-        <th>Year Model:</th><td>${d.yearModel || d.yearBought || "N/A"}</td>
+        <th>Model:</th><td>${d.model || "-"}</td>
+        <th>Year Model:</th><td>${d.yearModel || d.yearBought || "-"}</td>
       </tr>
       <tr>
-        <th>Color:</th><td>${d.Color || d.color || "N/A"}</td>
-        <th>Fuel Type:</th><td>${d.FuelType || "N/A"}</td>
+        <th>Color:</th><td>${d.Color || d.color || "-"}</td>
+        <th>Fuel Type:</th><td>${d.FuelType || "-"}</td>
       </tr>
       <tr>
-        <th>Classification:</th><td>${d.Classification || "N/A"}</td>
-        <th>Vehicle Type:</th><td>${d.VehicleType || "N/A"}</td>
+        <th>Classification:</th><td>${d.Classification || "-"}</td>
+        <th>Vehicle Type:</th><td>${d.VehicleType || "-"}</td>
       </tr>
       <tr>
-        <th>Gross Weight:</th><td>${d.GrossWt || "N/A"}</td>
-        <th>Net Weight:</th><td>${d.NetWt || "N/A"}</td>
+        <th>Gross Weight:</th><td>${d.GrossWt || "-"}</td>
+        <th>Net Weight:</th><td>${d.NetWt || "-"}</td>
       </tr>
       <tr>
-        <th>Shipping Weight:</th><td>${d.ShippingWt || "N/A"}</td>
-        <th>Net Capacity:</th><td>${d.NetCapacity || "N/A"}</td>
+        <th>Shipping Weight:</th><td>${d.ShippingWt || "-"}</td>
+        <th>Net Capacity:</th><td>${d.NetCapacity || "-"}</td>
       </tr>
       <tr>
-        <th>No. of Cylinders:</th><td>${d.NoofCylinders || "N/A"}</td>
-        <th>Piston Displacement:</th><td>${d.PistonDisplacement || "N/A"}</td>
+        <th>No. of Cylinders:</th><td>${d.NoofCylinders || "-"}</td>
+        <th>Piston Displacement:</th><td>${d.PistonDisplacement || "-"}</td>
       </tr>
       <tr>
-        <th>Engine No.:</th><td>${d.EngineNo || "N/A"}</td>
-        <th>Chassis No.:</th><td>${d.ChassisNo || "N/A"}</td>
+        <th>Engine No.:</th><td>${d.EngineNo || "-"}</td>
+        <th>Chassis No.:</th><td>${d.ChassisNo || "-"}</td>
       </tr>
       <tr>
-        <th>MV FILE NO.:</th><td>${d.MVFILENO || "N/A"}</td>
-         <th>LTO Client ID:</th><td>${d.LTOclientId || d.LTOClientID || "N/A"}</td>
+        <th>MV FILE NO.:</th><td>${d.MVFILENO || "-"}</td>
+         <th>LTO Client ID:</th><td>${d.LTOclientId || d.LTOClientID || "-"}</td>
       </tr>
       <tr>
-        <th>TIN:</th><td>${d.tin || "N/A"}</td>
-        <th>Account Number:</th><td>${d.AccountNumber || "N/A"}</td>
+        <th>TIN:</th><td>${d.tin || "-"}</td>
+        <th>Account Number:</th><td>${d.AccountNumber || "-"}</td>
       </tr>
       <tr>
-        <th>AutoSweep No.:</th><td>${d.AutoSweep || "N/A"}</td>
-        <th>Easy Trip No.:</th><td>${d.EasyTrip || "N/A"}</td>
+        <th>AutoSweep No.:</th><td>${d.AutoSweep || "-"}</td>
+        <th>Easy Trip No.:</th><td>${d.EasyTrip || "-"}</td>
       </tr>
       <tr>
-      <th>OR No.:</th><td>${d.OR || "N/A"}</td>
-       <th>CR No.:</th><td>${d.CRNO || "N/A"}</td>
+      <th>OR No.:</th><td>${d.OR || "-"}</td>
+       <th>CR No.:</th><td>${d.CRNO || "-"}</td>
       </tr>
     </table>
   `;
@@ -607,6 +607,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
