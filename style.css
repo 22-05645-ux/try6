@@ -63,9 +63,11 @@ main {
 .grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr));
+  grid-auto-rows: auto;
   gap: 25px;
   padding: 30px;
   justify-items: center;
+  align-items: start;
 }
 
 .card {
@@ -353,6 +355,7 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
 
