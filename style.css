@@ -30,15 +30,15 @@ main {
 
 .logo-container {
   display: flex;
-  align-items: center;
+  align-items: center;      /* vertically align logo with text */
+  gap: 15px;                /* space between logo and text */
 }
 
 .logo {
   width: 80px;
   height: 80px;
-  margin-right: 15px;
-  border-radius: 10px;
   object-fit: contain;
+  border-radius: 10px;
 }
 /* COMPANY NAME / TITLE beside logo */
 .logo-container h1 {
@@ -69,21 +69,24 @@ main {
 /* TITLE + SUBTITLE STACK */
 .title-container {
   display: flex;
-  flex-direction: column; /* ✅ puts subtitle below the title */
+  flex-direction: column;   /* ✅ subtitle below title */
   line-height: 1.2;
+  justify-content: center;
 }
 
 .title {
-  font-size: 24px;        /* bigger title */
-  font-weight: bold;
+  font-size: 26px;
+  font-weight: 800;
+  color: #ffffff;
   margin: 0;
 }
 
 .subtitle {
-  font-size: 16px;        /* smaller text below */
-  margin: 0;
-  color: #e0ffe0;         /* soft white-green tint */
-  font-weight: normal;
+  font-size: 16px;
+  font-weight: 500;
+  color: #c9ffd1;           /* lighter green tint */
+  margin: 3px 0 0;
+  letter-spacing: 0.5px;
 }
 /* FOOTER */
 .footer {
@@ -431,6 +434,7 @@ main {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+
 
 
 
