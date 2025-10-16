@@ -62,9 +62,10 @@ main {
 /* VEHICLE GRID */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-template-columns: repeat(4, 1fr));
   gap: 25px;
   padding: 30px;
+  justify-items: center;
 }
 
 .card {
@@ -352,6 +353,7 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
 
