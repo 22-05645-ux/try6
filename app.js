@@ -360,16 +360,16 @@ function renderTab(v, d) {
         <th>Vehicle Type:</th><td>${d.VehicleType || "N/A"}</td>
       </tr>
       <tr>
-        <th>No. of Cylinders:</th><td>${d.NoofCylinders || "N/A"}</td>
-        <th>Piston Displacement:</th><td>${d.PistonDisplacement || "N/A"}</td>
-      </tr>
-      <tr>
         <th>Gross Weight:</th><td>${d.GrossWt || "N/A"}</td>
         <th>Net Weight:</th><td>${d.NetWt || "N/A"}</td>
       </tr>
       <tr>
         <th>Shipping Weight:</th><td>${d.ShippingWt || "N/A"}</td>
         <th>Net Capacity:</th><td>${d.NetCapacity || "N/A"}</td>
+      </tr>
+      <tr>
+        <th>No. of Cylinders:</th><td>${d.NoofCylinders || "N/A"}</td>
+        <th>Piston Displacement:</th><td>${d.PistonDisplacement || "N/A"}</td>
       </tr>
       <tr>
         <th>Engine No.:</th><td>${d.EngineNo || "N/A"}</td>
@@ -608,6 +608,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
