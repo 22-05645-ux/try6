@@ -31,7 +31,6 @@ main {
 .logo-container {
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
 .logo {
@@ -67,6 +66,25 @@ main {
   font-family: "Segoe UI", Arial, sans-serif;
 }
 
+/* TITLE + SUBTITLE STACK */
+.title-container {
+  display: flex;
+  flex-direction: column; /* ✅ puts subtitle below the title */
+  line-height: 1.2;
+}
+
+.title {
+  font-size: 24px;        /* bigger title */
+  font-weight: bold;
+  margin: 0;
+}
+
+.subtitle {
+  font-size: 16px;        /* smaller text below */
+  margin: 0;
+  color: #e0ffe0;         /* soft white-green tint */
+  font-weight: normal;
+}
 /* FOOTER */
 .footer {
   text-align: center;
@@ -383,6 +401,7 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
 
