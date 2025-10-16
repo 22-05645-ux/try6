@@ -11,7 +11,6 @@ let vehicles = JSON.parse(localStorage.getItem("vehicles")) || [
   { plate: "WQT 225", whereabouts: "Batangas City", history: [] },
   { plate: "MAM 7806", whereabouts: "Batangas City", history: [] },
   { plate: "NBO 6586", whereabouts: "Batangas City", history: [] },
-  { plate: "EMPTY", whereabouts: "Batangas City", history: [] },
 ];
 
 const details = {
@@ -41,7 +40,7 @@ const details = {
              },
   "NGX 4853": { model: "Mitsubishi L300", 
                yearModel: "", 
-               color: "white", 
+               color: "White", 
                FuelType: "", 
                Classification:"", 
                VehicleType: "", 
@@ -65,7 +64,7 @@ const details = {
               },
   "NGX 4856": { model: "Mitsubishi L300", 
                yearModel: "", 
-               color: "white", 
+               color: "White", 
                FuelType: "", 
                Classification:"", 
                VehicleType: "", 
@@ -88,7 +87,7 @@ const details = {
               },
   "NFZ 2848": { model: "ISUZU Traviz", 
                yearModel: "", 
-               color: "white", 
+               color: "White", 
                FuelType: "", 
                Classification:"", 
                VehicleType: "", 
@@ -223,8 +222,8 @@ const details = {
               LTOclientId:"22-900101-2440171", 
               tin: "000865491061", 
               AccountNumber:"763041",
-               AutoSweep: "NQX657",
-               EasyTrip: "5200-3355-7983",
+              AutoSweep: "NQX657",
+              EasyTrip: "5200-3355-7983",
               OR:"0404-000000106583",
              },
   "MAM 7806": { model: "TRUCK", 
@@ -608,6 +607,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
