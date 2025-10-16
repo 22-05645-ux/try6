@@ -66,6 +66,7 @@ main {
   grid-auto-rows: auto;
   gap: 25px;
   padding: 30px;
+  justify-items: center;
   align-items: start;
 }
 
@@ -354,6 +355,7 @@ main {
     background: #145e26; /* alternate green for readability */
   }
 }
+
 
 
 
