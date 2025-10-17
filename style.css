@@ -504,6 +504,17 @@ main {
 .logout-btn:hover {
   background: #d32f2f;
 }
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  font-weight: 600;
+  color: #ffffff;
+}
+
 
 
 
