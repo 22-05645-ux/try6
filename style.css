@@ -101,7 +101,7 @@ main {
 /* VEHICLE GRID — fixed to 4x3 layout */
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto, 1fr);  /* ✅ 4 columns per row */
+  grid-template-columns: repeat(4, 1fr);  /* ✅ 4 columns per row */
   grid-auto-rows: auto;
   gap: 25px;
   padding: 30px;
@@ -434,6 +434,7 @@ main {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+
 
 
 
