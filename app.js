@@ -506,6 +506,13 @@ function renderTab(v, d) {
   }
 }
 
+if (localStorage.getItem("userRole") !== "admin") {
+  const buttons = tab.querySelectorAll("button");
+  buttons.forEach(btn => btn.disabled = true);
+  tab.querySelectorAll("form input, form select").forEach(f => f.disabled = true);
+}
+
+
 // ------------------- HISTORY -------------------
 function renderHistory(v, tab) {
   if (!v.history.length) {
@@ -608,6 +615,11 @@ function toggleHistory(type) {
 // ------------------- FORMS -------------------
 function submitMaintenance(e) {
   e.preventDefault();
+  if (localStorage.getItem("userRole") !== "admin") {
+  alert("Access denied. Only administrators can perform this action.");
+  return;
+}
+
   const d = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Maintenance", ...d });
@@ -616,6 +628,11 @@ function submitMaintenance(e) {
 
 function submitVehicleRequest(e) {
   e.preventDefault();
+  if (localStorage.getItem("userRole") !== "admin") {
+  alert("Access denied. Only administrators can perform this action.");
+  return;
+}
+
   const d = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Vehicle Request", ...d });
@@ -624,6 +641,11 @@ function submitVehicleRequest(e) {
 
 function submitWhereabouts(e) {
   e.preventDefault();
+  if (localStorage.getItem("userRole") !== "admin") {
+  alert("Access denied. Only administrators can perform this action.");
+  return;
+}
+
   const f = new FormData(e.target);
   const place = f.get("place") === "Company Use" ? `Company Use - ${f.get("company")}` : f.get("place");
   const v = vehicles.find(x => x.plate === selectedVehicle);
@@ -634,6 +656,11 @@ function submitWhereabouts(e) {
 
 function submitFuel(e) {
   e.preventDefault();
+  if (localStorage.getItem("userRole") !== "admin") {
+  alert("Access denied. Only administrators can perform this action.");
+  return;
+}
+
   const d = Object.fromEntries(new FormData(e.target));
   const v = vehicles.find(x => x.plate === selectedVehicle);
   v.history.push({ type: "Fuel", ...d });
@@ -642,6 +669,11 @@ function submitFuel(e) {
 
 function submitReport(e) {
   e.preventDefault();
+  if (localStorage.getItem("userRole") !== "admin") {
+  alert("Access denied. Only administrators can perform this action.");
+  return;
+}
+
   const fileInput = e.target.report.files[0];
   if (!fileInput) return alert("Please select a file first.");
 
@@ -669,6 +701,7 @@ if (localStorage.getItem("loggedIn") === "true") {
 } else {
   renderLogin();
 }
+
 
 
 
