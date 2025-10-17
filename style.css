@@ -435,6 +435,76 @@ main {
   transition: opacity 0.3s ease;
 }
 
+/* LOGIN PAGE STYLING */
+.login-container {
+  background: #f5fff8;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  width: 350px;
+  max-width: 90%;
+  margin: 120px auto;
+  padding: 40px 30px;
+  text-align: center;
+}
+
+.login-container h2 {
+  color: #0b6623;
+  font-size: 24px;
+  margin-bottom: 5px;
+}
+
+.login-subtitle {
+  color: #1a7431;
+  font-style: italic;
+  margin-bottom: 20px;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 10px;
+  margin: 8px 0;
+  border-radius: 6px;
+  border: 1px solid #8fd19e;
+}
+
+.login-container button {
+  background: #1a7431;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.login-container button:hover {
+  background: #145e26;
+}
+
+.login-note {
+  font-size: 13px;
+  color: #666;
+  margin-top: 10px;
+}
+
+/* LOGOUT BUTTON */
+.logout-btn {
+  background: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.logout-btn:hover {
+  background: #d32f2f;
+}
+
 
 
 
