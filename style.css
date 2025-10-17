@@ -137,8 +137,8 @@ main {
   transition: all 0.3s ease;
   cursor: pointer;
   width: 100%;
-  max-width: 300px;        /* consistent width */
-  min-height: 380px;       /* uniform height */
+  max-width: 200px;        /* consistent width */
+  min-height: 280px;       /* uniform height */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -434,6 +434,7 @@ main {
   opacity: 1;
   transition: opacity 0.3s ease;
 }
+
 
 
 
