@@ -134,7 +134,7 @@ const details = {
               },
   "CBP 1336": { model: "ISUZU Rebuilt Dropside W/ PTG Truck", 
                yearModel: "2021", 
-               color: "Sel/White", 
+               color: "White", 
                FuelType: "Diesel", 
                Classification:"Private", 
                VehicleType: "Utility Vehicle|UV|DIE", 
@@ -604,6 +604,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
