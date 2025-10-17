@@ -281,10 +281,12 @@ const vehicleImages = {
 
 const app = document.getElementById("app");
 // ------------------- LOGIN SYSTEM -------------------
+// ------------------- LOGIN SYSTEM -------------------
 const users = [
-  { username: "admin", password: "12345" },
-  { username: "fleet", password: "cifra2025" }
+  { username: "admin", password: "12345", role: "admin" },
+  { username: "fleet", password: "cifra2025", role: "viewer" }
 ];
+
 
 function renderLogin() {
   app.innerHTML = `
@@ -308,11 +310,14 @@ function handleLogin(e) {
 
   if (user) {
     localStorage.setItem("loggedIn", "true");
+    localStorage.setItem("userRole", user.role);
+    localStorage.setItem("username", user.username);
     renderList();
   } else {
     alert("Invalid username or password.");
   }
 }
+
 
 function handleLogout() {
   localStorage.removeItem("loggedIn");
@@ -664,6 +669,7 @@ if (localStorage.getItem("loggedIn") === "true") {
 } else {
   renderLogin();
 }
+
 
 
 
