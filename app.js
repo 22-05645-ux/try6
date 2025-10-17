@@ -449,13 +449,14 @@ function renderTab(v, d) {
     `;
   } 
   else if (activeTab === "Reports") {
-    tab.innerHTML = `
-      <form onsubmit="submitReport(event)">
-        <input type="file" name="report" required />
-        <button type="submit">Upload</button>
-      </form>
-    `;
-  } 
+  tab.innerHTML = `
+    <form onsubmit="submitReport(event)">
+      <input type="file" name="report" required />
+      <button type="submit">📤 Upload Report</button>
+    </form>
+  `;
+}
+
   else if (activeTab === "History") {
     renderHistory(v, tab);
   }
@@ -532,7 +533,13 @@ function generateRow(type, r) {
     case "Fuel": cells = `<td>${r.date}</td><td>${r.bearer}</td><td>${r.order}</td><td>${r.gas}</td><td>₱${r.amount}</td><td>${r.jo}</td>`; break;
     case "Vehicle Request": cells = `<td>${r.date}</td><td>${r.project}</td><td>${r.from}</td><td>${r.to}</td><td>${r.driver}</td><td>${r.purpose}</td><td>${r.request}</td>`; break;
     case "Whereabouts": cells = `<td>${r.date}</td><td>${r.place}</td>`; break;
-    case "Report": cells = `<td>${r.date}</td><td>${r.file}</td>`; break;
+    case "Report":
+  cells = `<td>${r.date}</td>
+           <td><a href="${r.fileURL}" download="${r.fileName}" target="_blank" 
+           style="color:#1a7431; text-decoration:none; font-weight:bold;">
+           ⬇️ ${r.fileName || "Download Report"}</a></td>`;
+  break;
+
     default: cells = `<td>${r.date}</td><td>${JSON.stringify(r)}</td>`;
   }
   return `<tr>${cells}<td><button class='del-btn' onclick="deleteRecord('${r.index}')">🗑️</button></td></tr>`;
@@ -591,9 +598,19 @@ function submitFuel(e) {
 
 function submitReport(e) {
   e.preventDefault();
-  const file = e.target.report.value.split("\\").pop();
+  const fileInput = e.target.report.files[0];
+  if (!fileInput) return alert("Please select a file first.");
+
+  const fileURL = URL.createObjectURL(fileInput);
   const v = vehicles.find(x => x.plate === selectedVehicle);
-  v.history.push({ type: "Report", date: new Date().toISOString().split("T")[0], file });
+
+  v.history.push({
+    type: "Report",
+    date: new Date().toISOString().split("T")[0],
+    fileName: fileInput.name,
+    fileURL: fileURL
+  });
+
   saveAndRefresh("History");
 }
 
@@ -604,6 +621,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
