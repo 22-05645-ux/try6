@@ -132,23 +132,23 @@ const details = {
                EasyTrip: "",
                OR:"2187876950",
               },
-  "CBP 1336": { model: "", 
-               yearModel: "", 
-               color: "White", 
-               FuelType: "", 
-               Classification:"", 
-               VehicleType: "", 
+  "CBP 1336": { model: "ISUZU Rebuilt Dropside W/ PTG Truck", 
+               yearModel: "2021", 
+               color: "Sel/White", 
+               FuelType: "Diesel", 
+               Classification:"Private", 
+               VehicleType: "Utility Vehicle|UV|DIE", 
                Aircon: "", 
-               GrossWt:"", 
-               NetWt: "", 
-               ShippingWt: "", 
-               NetCapacity: "", 
-               EngineNo:"", 
-               MVFILENO:"", 
+               GrossWt:"4200", 
+               NetWt: "2100", 
+               ShippingWt: "2100", 
+               NetCapacity: "2100", 
+               EngineNo:"4HG1-858189", 
+               MVFILENO:"0389-00000019723", 
                CRNO: "38358340-6 / 434598441", 
-               PistonDisplacement: "", 
-               NoofCylinders: "", 
-               ChassisNo:"", 
+               PistonDisplacement: "4570", 
+               NoofCylinders: "4", 
+               ChassisNo:"NKR71E-7426960", 
                LTOclientId:"", 
                tin: "",
                AccountNumber:"2417423",
@@ -604,6 +604,7 @@ function saveAndRefresh(tab){ saveData(); setTab(tab); }
 
 // ------------------- INIT -------------------
 renderList();
+
 
 
 
